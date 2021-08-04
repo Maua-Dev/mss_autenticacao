@@ -1,24 +1,49 @@
-# Template for Fast API
-[![codecov](https://codecov.io/gh/Maua-Dev/back_fastAPI_template/branch/main/graph/badge.svg?token=M16VBNGBR3)](https://codecov.io/gh/Maua-Dev/back_fastAPI_template)
+# MSS - Autenticação
+[![codecov](https://codecov.io/gh/Maua-Dev/back_fastAPI_template/branch/main/graph/badge.svg?token=M16VBNGBR3)](https://app.codecov.io/gh/Maua-Dev/mss_autenticacao)
+
+Microsserviço para o sistema de Autenticação, usando JWT 
 
 
-This is a template to create Fast API based repositories 
+# Instalação
 
-## First Steps:
+Comece ao clonar o repositório do modo que achar mais adequado.
 
-### Create a python virtual enviroment:
+### Criar um ambiente virtual python:
     py -m venv venv
 
-### Activate virtual enviroment (*windows*)
+### Ativar ambiente virtual (windows)
     venv\Scripts\activate
 
-### Install requirements
+### Instalar pacotes necessários
     pip install -r requirements.txt
 
-# Usage:
+# Uso:
 
-### Start server
+### Desenvolvimento com Docker Composer
+
+Para construir a imagem:
+    
+    docker-compose build
+
+Para subir o container:
+
+    docker-compose up
+
+### Iniciar server
+
     uvicorn src.main:app --reload
 
-### Run tests
+### Rodar testes
+
     pytest
+
+# Autores
+## Grupo Back-end
+
+    Nome - Github username
+# Contribuições
+Sendo um projeto fechado para alunos da faculdade Mauá, apenas os alunos podem contribuir para o projeto. 
+Para mudanças, edições e outros, ver o arquivo [CONTRIBUTING.md](./CONTRIBUTING.md)
+
+# Licença
+No momento, não há licença. 
