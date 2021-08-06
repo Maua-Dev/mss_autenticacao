@@ -16,6 +16,14 @@ e o projeto mantém [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 - [RESOURCES.md](./RESOURCES.md), adicionando documentação usada de pyjwt e link referência ao jwt.
 - [requirements.txt](./requirements.txt), incluindo pyjwt e pyjwt[crypto], para criar jwt assimétrico.
 
+
+## [0.0.4] - 2021-08-06
+### Adicionado
+- Pasta erros em src.usecases para retorar os possíveis erros.
+
+### Modificado
+- uc_criar_jwt.py para incluir os erros e retornar o token, caso dê certo.
+
 ## [0.0.3] - 2021-08-05
 ### Adicionado
 - Pasta Controladores em src
