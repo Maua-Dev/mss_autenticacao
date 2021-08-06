@@ -45,4 +45,3 @@ def testeCompararJWTFail(testeModelJWT):
 @pytest.mark.xfail
 def testeAssertFalse():
     assert False
-    
