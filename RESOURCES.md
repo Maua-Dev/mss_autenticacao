@@ -7,3 +7,9 @@ https://www.makeareadme.com/
 
 ### CHANGELOG
 keepachangelog.com/
+
+### Python library - JWT (Documentation)
+https://pyjwt.readthedocs.io
+
+### Pesquisa em JWT
+https://jwt.io/

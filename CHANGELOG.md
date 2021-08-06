@@ -7,6 +7,14 @@ e o projeto mantém [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
 ## [Não publicado]
 
+## [0.0.4] - 2021-08-05
+### Adicionado 
+- UCCriarJWT
+- IGeracaoToken, interface para ter todos os métodos relacionados a criação de JWT
+
+### Modificado
+- [RESOURCES.md](./RESOURCES.md), adicionando documentação usada de pyjwt e link referência ao jwt.
+- [requirements.txt](./requirements.txt), incluindo pyjwt e pyjwt[crypto], para criar jwt assimétrico.
 
 ## [0.0.3] - 2021-08-05
 ### Adicionado
