@@ -8,17 +8,20 @@ from src.usecases.errors.erros_uc_criar_jwt import ErroSecretVazio
 from src.usecases.errors.erros_uc_criar_jwt import ErroPayloadVazio
 
 class UCCriarJWT():
-    def __init__(self, jwtRepo: IGeracaoToken):
-        self.jwtRepo = jwtRepo
 
-    def __call__(self, payload: dict, secret: str, algorithm: str):
-        if not payload:
+    def __init__(self, payload: dict, secret: str, algorithm: str):
+        self.payload = payload
+        self.secret = secret
+        self.algorithm = algorithm
+
+    def __call__(self):
+        if not self.payload:
             raise ErroPayloadVazio
-        if not secret:
+        if not self.secret:
             raise ErroSecretVazio
-        if not algorithm:
+        if not self.algorithm:
             raise ErroAlgoritmoVazio
         try:
-            return self.jwtRepo.jwt.encode(payload, secret, algorithm)
+            return self.jwtRepo.jwt.encode(self.payload, self.secret, self.algorithm)
         except:
             raise ErroFalhaCriar
