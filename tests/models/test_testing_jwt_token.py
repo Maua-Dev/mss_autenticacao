@@ -1,4 +1,4 @@
-from tests.models.test_model_jwt_token import JWTToken
+from tests.models.test_model_jwt_token_encriptografar import JWTToken
 import pytest
 
 def testClass():

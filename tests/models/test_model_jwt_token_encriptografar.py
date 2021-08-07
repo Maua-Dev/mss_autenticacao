@@ -1,8 +1,6 @@
 import abc
 from pydantic import BaseModel, validator, ValidationError
 
-import jwt
-
 class JWTToken(BaseModel):
     payload : dict
     chave : str
