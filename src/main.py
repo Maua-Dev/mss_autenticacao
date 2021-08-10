@@ -12,5 +12,4 @@ async def root():
 
 @app.post("/token")
 async def gerarToken(request: Request):
-    result = await request.json()
-    return CHTTPGerarToken().gerarToken(result)
+    return CHTTPGerarToken().gerarToken(await request.json())
