@@ -31,7 +31,19 @@ class ModelJWTToken(BaseModel):
             raise ValueError("Header Vazio")
         return v
     
-        
+    @staticmethod
+    def criarJWTTokenPorDictionary(d: dict):
+        try:
+            modelJWTToken = ModelJWTToken(
+                payload = d['payload'],
+                chave = d['chave'],
+                algoritmo = d['algoritmo'],
+                header = d['header']
+            )
+            return modelJWTToken
+        except:
+            
+            raise Exception
 
     
     
