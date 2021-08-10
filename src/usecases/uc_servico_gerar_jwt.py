@@ -1,10 +1,10 @@
 from fastapi import Response, responses
 
-from src.usecases.uc_criar_jwt import JWTToken
-from src.usecases.uc_criar_chave import JWTChave
+from src.usecases.uc_criar_jwt import UseCaseCriarJWT
+from src.usecases.uc_criar_chave import UseCaseCriarChave
 
-from src.models.m_jwt_chave import MJWTChave
-from src.models.m_jwt_token import MJWTToken
+from src.models.m_jwt_chave import ModelJWTChave
+from src.models.m_jwt_token import ModelJWTToken
 
 class ControllerHTTPGerarJWT():
 
@@ -12,8 +12,8 @@ class ControllerHTTPGerarJWT():
 
         try:
             
-            #modelChave = MJWTChave()
-            modelToken = MJWTToken()
+            #modelChave = ModelJWTChave()
+            modelToken = ModelJWTToken()
             
         except:
             response = Exception

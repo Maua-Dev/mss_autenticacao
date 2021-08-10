@@ -8,11 +8,11 @@ from src.models.m_jwt_token import ModelJWTToken
 class InterfaceJWTEncriptografar(ABC):
     
     @abstractmethod
-    def criarJWT(self, jwtDados: ModelJWTToken, chave: str):
+    def criarJWT(self, modelJWTToken: ModelJWTToken, chave: str):
         """ Cria JWT com valores e chave. """
         pass
     
     @abstractmethod
-    def criarChave(self, jwtChave: ModelJWTChave):
+    def criarChave(self, modelJWTChave: ModelJWTChave):
         """ Cria chave para JWT """
         pass

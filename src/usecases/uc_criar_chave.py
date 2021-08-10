@@ -4,17 +4,17 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.backends import default_backend
 import pytest
 
-class UseCaseriarChave():
+class UseCaseCriarChave():
 
     interfaceJWTEncriptografar : InterfaceJWTEncriptografar
     
     def __init__(self, interfaceJWTEncriptografar : InterfaceJWTEncriptografar):
         self.interfaceJWTEncriptografar = interfaceJWTEncriptografar
         
-    def criarChave(self, jwtDados: ModelJWTChave):
+    def criarChave(self, modelJWTChave: ModelJWTChave):
         try:
             private_key = serialization.load_pem_private_key(
-                jwtDados.privateChave, password=jwtDados.senha, backend=default_backend()
+                modelJWTChave.privateChave, password=modelJWTChave.senha, backend=default_backend()
                 )
             return private_key
         except Exception as e:
