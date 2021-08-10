@@ -1,7 +1,7 @@
 import abc
 from pydantic import BaseModel, validator, ValidationError
 
-class MJWTToken(BaseModel):
+class ModelJWTToken(BaseModel):
     payload : dict
     chave : str
     algoritmo : str

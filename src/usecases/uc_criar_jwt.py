@@ -1,17 +1,17 @@
 import pytest
 import jwt
 
-from src.interfaces.i_jwt_encriptografar import IJWTEncriptografar
-from src.models.m_jwt_token import MJWTToken
+from src.interfaces.i_jwt_encriptografar import InterfaceJWTEncriptografar
+from src.models.m_jwt_token import ModelJWTToken
 
-class UCCriarJWT():
+class UseCaseCriarJWT():
 
-    iJWTEncriptografar : IJWTEncriptografar
+    iJWTEncriptografar : InterfaceJWTEncriptografar
     
-    def __init__(self, iJWTEncriptografar : IJWTEncriptografar):
-        self.iJWTEncriptografar = iJWTEncriptografar
+    def __init__(self, interfaceJWTEncriptografar : InterfaceJWTEncriptografar):
+        self.interfaceJWTEncriptografar = interfaceJWTEncriptografar
         
-    def criarJWT(self, jwtDados: MJWTToken, chave: str):
+    def criarJWT(self, jwtDados: ModelJWTToken, chave: str):
         if not chave:
             raise Exception
         try:

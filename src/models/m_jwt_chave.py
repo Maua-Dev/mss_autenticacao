@@ -1,7 +1,7 @@
 import abc
 from pydantic import BaseModel, validator, ValidationError
 
-class MJWTChave(BaseModel):
+class ModelJWTChave(BaseModel):
     privateChave : str
     senha : str
     
