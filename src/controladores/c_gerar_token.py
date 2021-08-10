@@ -10,11 +10,11 @@ from fastapi import Response, responses
 
 class CHTTPGerarToken():
     
-    def gerarToken(self, body: dict, ucCriarJWT : UCCriarJWT):
+    def gerarToken(self, body: dict):
         
         try:
             modelJWTToken = JWTToken.criarJWTTokenPorDictionary(body)
-            content = ucCriarJWT.criarJWT(modelJWTToken=modelJWTToken, chave="tempkey")
+            content = UCCriarJWT(IJWTEncriptografar).criarJWT(modelJWTToken=modelJWTToken, chave="tempkey")
             response = Response(content=str(content), status_code=200)
             
         except:

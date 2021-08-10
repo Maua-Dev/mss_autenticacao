@@ -1,4 +1,3 @@
-import pytest
 import jwt
 
 from src.interfaces.i_jwt_encriptografar import IJWTEncriptografar

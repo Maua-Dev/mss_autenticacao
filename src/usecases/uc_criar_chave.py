@@ -2,7 +2,7 @@ from src.models.m_jwt_chave import JWTChave
 from src.interfaces.i_jwt_encriptografar import IJWTEncriptografar
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.backends import default_backend
-import pytest
+
 
 class UCCriarChave():
 
