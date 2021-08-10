@@ -51,7 +51,18 @@ def testClassExceptionFaltaHeader():
             header={}
         )
     
-
+def testClassCriarDictionary():
+    dictionary = {
+        "payload" : {"sub": "1234567890","name": "John Doe","iat": 1516239022},
+        "chave" : "your-256-bit-secret",
+        "algoritmo" : "HS256",
+        "header" : {"typ": "JWT"}
+    }
+    jwtToken = JWTToken.criarJWTTokenPorDictionary(dictionary)
+    assert jwtToken.payload == dictionary['payload']
+    assert jwtToken.chave == dictionary['chave']
+    assert jwtToken.algoritmo == dictionary['algoritmo']
+    assert jwtToken.header == dictionary['header']
 
 
     

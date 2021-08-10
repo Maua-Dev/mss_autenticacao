@@ -1,4 +1,5 @@
 import abc
+import jwt
 from pydantic import BaseModel, validator, ValidationError
 
 class JWTToken(BaseModel):
@@ -30,6 +31,20 @@ class JWTToken(BaseModel):
         if (len(v) == 0):
             raise ValueError("Header Vazio")
         return v
+    
+    @staticmethod
+    def criarJWTTokenPorDictionary(d: dict):
+        try:
+            jwtToken = JWTToken(
+                payload = d['payload'],
+                chave = d['chave'],
+                algoritmo = d['algoritmo'],
+                header = d['header']
+            )
+            return jwtToken
+        except:
+            
+            raise Exception
     
         
 
