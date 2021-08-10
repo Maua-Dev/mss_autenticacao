@@ -1,7 +1,7 @@
 import abc
 from pydantic import BaseModel, validator, ValidationError
 
-class ModelJWTToken(BaseModel):
+class JWTToken(BaseModel):
     payload : dict
     chave : str
     algoritmo : str
@@ -34,13 +34,13 @@ class ModelJWTToken(BaseModel):
     @staticmethod
     def criarJWTTokenPorDictionary(d: dict):
         try:
-            modelJWTToken = ModelJWTToken(
+            jwtToken = JWTToken(
                 payload = d['payload'],
                 chave = d['chave'],
                 algoritmo = d['algoritmo'],
                 header = d['header']
             )
-            return modelJWTToken
+            return jwtToken
         except:
             
             raise Exception

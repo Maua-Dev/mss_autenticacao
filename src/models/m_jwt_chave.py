@@ -1,7 +1,7 @@
 import abc
 from pydantic import BaseModel, validator, ValidationError
 
-class ModelJWTChave(BaseModel):
+class JWTChave(BaseModel):
     privateChave : str
     senha : str
     
