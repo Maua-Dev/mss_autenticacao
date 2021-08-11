@@ -1,3 +1,5 @@
 venv/
 .coverage
 *.pyc
+*.pem
+.env

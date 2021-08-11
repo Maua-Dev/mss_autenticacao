@@ -11,11 +11,10 @@ class UCCriarChave():
     def __init__(self, iJWTEncriptografar : IJWTEncriptografar):
         self.iJWTEncriptografar = iJWTEncriptografar
         
-    def criarChave(self, modelJWTChave: JWTChave):
+    def criarChave(self):
         try:
-            private_key = serialization.load_pem_private_key(
-                modelJWTChave.privateChave, password=modelJWTChave.senha, backend=default_backend()
-                )
+            private_key = ""
+            
             return private_key
         except Exception as e:
             raise e
