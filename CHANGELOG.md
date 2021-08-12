@@ -6,11 +6,25 @@ O formato é baseado em [Mantenha um Changelog](https://keepachangelog.com/pt-BR
 e o projeto mantém [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
 ## [Não publicado]
+### Adicionado
+- Pasta erros para models
+- Models básicos para a geração de tokens
+- Pasta erros para usecases
+- Usecases iniciais para geracação de tokens
+- Pasta erros para repositórios
+- Pasta criacao para criação de tokens, baseado no que for pedido.
+- docker-compose.yml
+
+### Modificado
+- Controller CHTTPGerarToken em relação de como é usado e como chama token.py
+- Readme
+- main, refatorado alguns problemas
+- Resources, com mais recursos.
 
 ## [0.0.4] - 2021-08-05
 ### Adicionado 
 - UCCriarJWT
-- IGeracaoToken, interface para ter todos os métodos relacionados a criação de JWT
+- IGeracaoToken, interface para ter todos os métodos relacionados a criação de tokens
 
 ### Modificado
 - [RESOURCES.md](./RESOURCES.md), adicionando documentação usada de pyjwt e link referência ao jwt.

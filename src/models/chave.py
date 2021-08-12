@@ -1,18 +1,18 @@
 import abc
 from pydantic import BaseModel, validator, ValidationError
 
-class JWTChave(BaseModel):
-    privateChave : str
+class Chave(BaseModel):
+    chavePrivada : str
     senha : str
     
-    @validator('privateChave', check_fields=False)
-    def privateChaveNotEmpty(cls, v):
+    @validator('chavePrivada', check_fields=False)
+    def chavePrivadaNaoVazia(cls, v):
         if (len(v) == 0):
-            raise ValueError("PrivateChave Vazio")
+            raise ValueError("chavePrivada Vazio")
         return v
     
     @validator('senha')
-    def senhaNotEmpty(cls, v):
+    def senhaNaoVazia(cls, v):
         if (len(v) == 0):
             raise ValueError("Senha Vazio")
         return v

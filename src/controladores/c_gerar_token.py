@@ -1,24 +1,20 @@
-from src.models.m_jwt_chave import JWTChave
-from src.models.m_jwt_token import JWTToken
+from fastapi import Response
 
-from src.interfaces.i_jwt_encriptografar import IJWTEncriptografar
+from src.models.chave import Chave
+from src.models.token import Token
 
-from src.usecases.uc_criar_chave import UCCriarChave
-from src.usecases.uc_criar_jwt import UCCriarJWT
+from src.interfaces.i_geracao import IGeracao
+
+from src.usecases.uc_criar_token import UCCriarToken
 
 from fastapi import Response, responses
 
 class CHTTPGerarToken():
     
-    def gerarToken(self, body: dict):
+    def gerarToken(self, body: dict, criarTokenUC : UCCriarToken):
         try:
-            modelJWTToken = JWTToken(
-                payload=body,
-                chave="your-256-bit-secret",
-                algoritmo="HS256",
-                header={"typ": "JWT"}
-            )
-            content = UCCriarJWT(IJWTEncriptografar).criarJWT(modelJWTToken=modelJWTToken)
+            token = Token.fromDict(body)
+            content = criarTokenUC(token)
             response = Response(content=str(content), status_code=200)
             
         except:

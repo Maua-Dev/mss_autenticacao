@@ -13,3 +13,10 @@ https://pyjwt.readthedocs.io
 
 ### Pesquisa em JWT
 https://jwt.io/
+
+### Python library - Oauth (Documentation)
+https://oauthlib.readthedocs.io/en/latest/
+### Python library - OTP (Documentation)
+https://github.com/pyauth/pyotp
+### Web authentications
+https://testdriven.io/blog/web-authentication-methods/
