@@ -4,12 +4,12 @@ from dotenv import dotenv_values
 from src.models.token import Token
 from src.models.chave import Chave
 
-from src.interfaces.i_geracao import IGeracao
+from src.interfaces.i_auth import IAuth
 
 from src.repositorios.erros.erros_jwt import ErroCarregarEnv
 
 
-class OTPGeracao(IGeracao):
+class AuthOAuth(IAuth):
     def criarToken(self, token: Token):
         pass
 
@@ -25,7 +25,7 @@ class OTPGeracao(IGeracao):
         else:
             return False
     
-    def chaveInvalido(self, chave: Chave):
+    def chaveInvalida(self, chave: Chave):
         if not chave.chavePrivada:
             return True
         else:

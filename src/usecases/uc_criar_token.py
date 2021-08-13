@@ -1,17 +1,17 @@
 from src.models.token import Token
 
-from src.interfaces.i_geracao import IGeracao
+from src.interfaces.i_auth import IAuth
 
 from src.usecases.errors.erros_uc import ErroTokenInvalido
 
 class UCCriarToken():
 
-    geracao : IGeracao
+    auth : IAuth
     
-    def __init__(self, geracao : IGeracao):
-        self.geracao = geracao
+    def __init__(self, auth : IAuth):
+        self.auth = auth
         
     def __call__(self, token: Token):
-        if self.geracao.tokenInvalido(token):
+        if self.auth.tokenInvalido(token):
             raise ErroTokenInvalido
-        return self.geracao.criarToken(token)
+        return self.auth.criarToken(token)

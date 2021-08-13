@@ -1,24 +1,29 @@
 from fastapi import Response
+from src.models import token
 
 from src.models.chave import Chave
 from src.models.token import Token
 
-from src.interfaces.i_geracao import IGeracao
+from src.interfaces.i_auth import IAuth
 
 from src.usecases.uc_criar_token import UCCriarToken
 
-from fastapi import Response, responses
+from fastapi import Response
 
-class CHTTPGerarToken():
+class CGerarTokenFastAPI():
     
-    def gerarToken(self, body: dict, criarTokenUC : UCCriarToken):
+    auth : IAuth
+    
+    def __init__(self, auth: IAuth):
+        self.auth = auth
+        
+    def __call__(self, body: dict):
         try:
             token = Token.fromDict(body)
-            content = criarTokenUC(token)
+            content = UCCriarToken(self.auth)(token)
             response = Response(content=str(content), status_code=200)
-            
         except:
             response = Response(content="Error", status_code=400)
-
+            
         return response
     

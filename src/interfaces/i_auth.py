@@ -5,7 +5,7 @@ from datetime import date
 from src.models.chave import Chave
 from src.models.token import Token
 
-class IGeracao(ABC):
+class IAuth(ABC):
     
     @abstractmethod
     def criarToken(self, token: Token):
@@ -24,7 +24,7 @@ class IGeracao(ABC):
         pass
     
     @abstractmethod
-    def chaveInvalido(self, chave: Chave):
+    def chaveInvalida(self, chave: Chave):
         pass
     
     

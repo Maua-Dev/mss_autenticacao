@@ -14,9 +14,9 @@ class Token(BaseModel):
         return v
     
     @validator('chave')
-    def chaveNaoVazio(cls, v):
+    def chaveNaoVazia(cls, v):
         if (len(v) == 0):
-            raise ValueError("Chave Vazio")
+            raise ValueError("Chave Vazia")
         return v
         
     @validator('algoritmo')

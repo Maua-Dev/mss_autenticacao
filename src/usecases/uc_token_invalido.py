@@ -1,14 +1,14 @@
 from src.models.token import Token
 
-from src.interfaces.i_geracao import IGeracao
+from src.interfaces.i_auth import IAuth
 
 
 class UCTokenInvalido():
 
-    geracao : IGeracao
+    auth : IAuth
     
-    def __init__(self, geracao : IGeracao):
-        self.geracao = geracao
+    def __init__(self, auth : IAuth):
+        self.auth = auth
         
     def __call__(self, token: Token):
-        return self.geracao.tokenInvalido(token)
+        return self.auth.tokenInvalido(token)

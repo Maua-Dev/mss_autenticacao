@@ -1,12 +1,12 @@
-from src.interfaces.i_geracao import IGeracao
+from src.interfaces.i_auth import IAuth
 
 
 class UCCarregarChave():
 
-    geracao : IGeracao
+    auth : IAuth
     
-    def __init__(self, geracao : IGeracao):
-        self.geracao = geracao
+    def __init__(self, auth : IAuth):
+        self.auth = auth
         
     def __call__(self):
-        return self.geracao.carregarChave()
+        return self.auth.carregarChave()
