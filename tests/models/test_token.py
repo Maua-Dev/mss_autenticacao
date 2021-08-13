@@ -1,23 +1,23 @@
-from tests.models.test_model_jwt_token_encriptografar import JWTToken
+from src.models.token import Token
 import pytest
 
 def testClass():
     # Usando valores default de jwt.io, convertidos
-    jWTToken = JWTToken(
+    token = Token(
         payload={"sub": "1234567890","name": "John Doe","iat": 1516239022},
         chave="your-256-bit-secret",
         algoritmo="HS256",
         header={"typ": "JWT"}
         )
     
-    assert jWTToken.payload == {"sub": "1234567890","name": "John Doe","iat": 1516239022}
-    assert jWTToken.chave == "your-256-bit-secret"
-    assert jWTToken.algoritmo == "HS256"
-    assert jWTToken.header == {"typ": "JWT"}
+    assert token.payload == {"sub": "1234567890","name": "John Doe","iat": 1516239022}
+    assert token.chave == "your-256-bit-secret"
+    assert token.algoritmo == "HS256"
+    assert token.header == {"typ": "JWT"}
     
 def testClassExceptionFaltaPayload():
     with pytest.raises(Exception) as ValueError:
-        jWTToken = JWTToken(
+        token = Token(
             payload={},
             chave="your-256-bit-secret",
             algoritmo="HS256",
@@ -26,7 +26,7 @@ def testClassExceptionFaltaPayload():
 
 def testClassExceptionFaltaChave():
     with pytest.raises(Exception) as ValueError:
-        jWTToken = JWTToken(
+        token = Token(
             payload={"sub": "1234567890","name": "John Doe","iat": 1516239022},
             chave="",
             algoritmo="HS256",
@@ -35,7 +35,7 @@ def testClassExceptionFaltaChave():
         
 def testClassExceptionFaltaAlgoritmo():
     with pytest.raises(Exception) as ValueError:
-        jWTToken = JWTToken(
+        token = Token(
             payload={"sub": "1234567890","name": "John Doe","iat": 1516239022},
             chave="your-256-bit-secret",
             algoritmo="",
@@ -44,7 +44,7 @@ def testClassExceptionFaltaAlgoritmo():
         
 def testClassExceptionFaltaHeader():
     with pytest.raises(Exception) as ValueError:
-        jWTToken = JWTToken(
+        token = Token(
             payload={"sub": "1234567890","name": "John Doe","iat": 1516239022},
             chave="your-256-bit-secret",
             algoritmo="HS256",
@@ -58,11 +58,8 @@ def testClassCriarDictionary():
         "algoritmo" : "HS256",
         "header" : {"typ": "JWT"}
     }
-    jwtToken = JWTToken.criarJWTTokenPorDictionary(dictionary)
-    assert jwtToken.payload == dictionary['payload']
-    assert jwtToken.chave == dictionary['chave']
-    assert jwtToken.algoritmo == dictionary['algoritmo']
-    assert jwtToken.header == dictionary['header']
+    token = Token.fromDict(dictionary)
+    assert token.payload == dictionary['payload']
 
 
     
