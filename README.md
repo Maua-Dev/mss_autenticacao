@@ -1,7 +1,7 @@
 # MSS - Autenticação
 [![codecov](https://codecov.io/gh/Maua-Dev/back_fastAPI_template/branch/main/graph/badge.svg?token=M16VBNGBR3)](https://app.codecov.io/gh/Maua-Dev/mss_autenticacao)
 
-Microsserviço para o sistema de Autenticação, usando JWT 
+Microsserviço para o sistema de Autenticação
 
 
 # Instalação

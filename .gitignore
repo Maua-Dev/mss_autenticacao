@@ -1,3 +1,6 @@
 venv/
 .coverage
 *.pyc
+*.pem
+.env
+.vscode/
