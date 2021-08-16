@@ -13,7 +13,8 @@ controllerGerarToken = CGerarTokenFastAPI(AuthJWT())
 
 @app.get("/")
 async def root():
-    return {"mss": "autenticacao"}
+    return {"mss": "autenticacao",
+            "porta": 8080}
 
 @app.post("/token")
 async def gerarToken(request: Request):
