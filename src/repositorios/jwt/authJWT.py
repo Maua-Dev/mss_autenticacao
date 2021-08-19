@@ -39,5 +39,11 @@ class AuthJWT(IAuth):
         else:
             return False
 
-    def verificarToken(self, response: String):
-        pass
+    def verificarToken(self, response: str):
+        try:
+            chave = self.carregarChave()
+            result = jwt.decode(response, chave, "HS256")
+        except:
+            result = ""
+            raise Exception
+        return result

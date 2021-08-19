@@ -31,5 +31,5 @@ class AuthOAuth(IAuth):
         else:
             return False
 
-    def verificarToken(self, response: String):
+    def verificarToken(self, response: str):
         pass
