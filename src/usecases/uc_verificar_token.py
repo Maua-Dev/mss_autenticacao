@@ -8,5 +8,5 @@ class UCVerificarToken():
     def __init__(self, auth: IAuth):
         self.auth = auth
 
-    def __call__(self, token: Token):
-        return self.auth.verificarToken(token)
+    def __call__(self, response: String):
+        return self.auth.verificarToken(response)

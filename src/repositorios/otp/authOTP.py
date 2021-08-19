@@ -30,3 +30,6 @@ class AuthOTP(IAuth):
             return True
         else:
             return False
+
+    def verificarToken(self, response: String):
+        pass
