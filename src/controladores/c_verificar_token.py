@@ -2,7 +2,7 @@ from fastapi import Response
 
 from src.interfaces.i_auth import IAuth
 
-from src.usecases.uc_criar_token import UCVerificarToken
+from src.usecases.uc_verificar_token import UCVerificarToken
 
 from fastapi import Response
 
