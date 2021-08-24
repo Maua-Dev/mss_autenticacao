@@ -6,7 +6,7 @@ from src.usecases.uc_verificar_token import UCVerificarToken
 
 from fastapi import Response
 
-class CVerificarToken():
+class CVerificarTokenFastAPI():
     auth: IAuth
 
     def __init__(self, auth: IAuth):
