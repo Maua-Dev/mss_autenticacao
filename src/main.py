@@ -8,7 +8,7 @@ from src.repositorios.otp import authOTP
 
 app = FastAPI()
 
-fabricaFastAPI = FabricaControladorFastAPI(AuthJWT())
+controlador = FabricaControladorFastAPI(AuthJWT())
 
 @app.get("/")
 async def root():
@@ -17,8 +17,8 @@ async def root():
 
 @app.post("/token")
 async def gerarToken(request: Request):
-    return fabricaFastAPI.gerarToken(await request.json())
+    return controlador.gerarToken(await request.json())
 
 @app.post("/verificar")
 async def verificarToken(request: Request):
-    return fabricaFastAPI.verificarToken(await request.body())
+    return controlador.verificarToken(await request.body())
