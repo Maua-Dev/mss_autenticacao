@@ -22,9 +22,13 @@ class IAuth(ABC):
     @abstractmethod
     def tokenInvalido(self, token: Token):
         pass
-    
+
     @abstractmethod
     def chaveInvalida(self, chave: Chave):
+        pass
+
+    @abstractmethod
+    def verificarToken(self, chave: Chave):
         pass
     
     

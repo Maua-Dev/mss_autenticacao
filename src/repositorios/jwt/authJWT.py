@@ -8,7 +8,7 @@ from src.models.chave import Chave
 
 from src.interfaces.i_auth import IAuth
 
-from src.repositorios.erros.erros_jwt import ErroCarregarEnv
+from src.repositorios.erros.erros_jwt import ErroCarregarEnv, ErroAssinaturaExpirada, ErroFalhaDecoder, ErroValidacao
 
 
 class AuthJWT(IAuth):
@@ -38,3 +38,26 @@ class AuthJWT(IAuth):
             return True
         else:
             return False
+
+    def verificarToken(self, response: str):
+        try:
+            chave = self.carregarChave()
+            result = jwt.decode(response, chave, "HS256")
+            
+        except jwt.ExpiredSignatureError: 
+            result = ""
+            raise ErroAssinaturaExpirada
+        
+        except jwt.InvalidSignatureError: 
+            result = ""
+            raise ErroValidacao
+        
+        except jwt.InvalidTokenError: 
+            result = ""
+            raise ErroFalhaDecoder
+        
+        except jwt.DecodeError: 
+            result = ""
+            raise ErroValidacao
+        
+        return result
