@@ -6,7 +6,7 @@ class ErroAssinaturaExpirada(Exception):
     def __init__(self):
         super().__init__("O tempo de sua assinatura acabou.")
         
-class ErroDecoderFalha(Exception):
+class ErroFalhaDecoder(Exception):
     def __init__(self):
         super().__init__("O decoder falhou em decodificar.")
         

@@ -8,7 +8,7 @@ from src.models.chave import Chave
 
 from src.interfaces.i_auth import IAuth
 
-from src.repositorios.erros.erros_jwt import ErroCarregarEnv, ErroAssinaturaExpirada, ErroDecoderFalha, ErroValidacao
+from src.repositorios.erros.erros_jwt import ErroCarregarEnv, ErroAssinaturaExpirada, ErroFalhaDecoder, ErroValidacao
 
 
 class AuthJWT(IAuth):
@@ -54,7 +54,7 @@ class AuthJWT(IAuth):
         
         except jwt.InvalidTokenError: 
             result = ""
-            raise ErroDecoderFalha
+            raise ErroFalhaDecoder
         
         except jwt.DecodeError: 
             result = ""
