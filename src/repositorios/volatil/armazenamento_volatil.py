@@ -23,7 +23,7 @@ class ArmazenamentoUsuarioVolatil(IArmazenamento):
     def alterarSenha(self, login: Login):
         for l in self.armazem:
             if l.email == login.email:
-                l.senhaEncriptada = login.senhaEncriptada
+                l.senha = login.senha
                 return True;
         return False
 
@@ -37,5 +37,5 @@ class ArmazenamentoUsuarioVolatil(IArmazenamento):
     def getSenhaEncriptadaPorEmail(self, email: str):
         for l in self.armazem:
             if l.email == email:
-                return l.senhaEncriptada
+                return l.senha
 

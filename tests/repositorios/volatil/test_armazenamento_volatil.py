@@ -12,7 +12,7 @@ class TestArmazenamentoVolatil:
 
         #setup
         self.armazenamento = ArmazenamentoUsuarioVolatil()
-        self.login = Login(email="18.01234-5@maua.br", senhaEncriptada="test")
+        self.login = Login(email="18.01234-5@maua.br", senha="test")
         self.armazenamento.cadastrarLoginAuth(login=self.login)
 
         yield
@@ -25,10 +25,10 @@ class TestArmazenamentoVolatil:
 
 
     def testAlterarSenha(self):
-        assert self.armazenamento.armazem[0].senhaEncriptada == "test"
+        assert self.armazenamento.armazem[0].senha == "test"
 
-        self.armazenamento.alterarSenha(Login(email=self.login.email, senhaEncriptada="alteracao"))
-        assert self.armazenamento.armazem[0].senhaEncriptada == "alteracao"
+        self.armazenamento.alterarSenha(Login(email=self.login.email, senha="alteracao"))
+        assert self.armazenamento.armazem[0].senha == "alteracao"
         assert len(self.armazenamento.armazem) == 1
 
     def testDeletarLoginAuthPorEmail(self):
@@ -39,4 +39,4 @@ class TestArmazenamentoVolatil:
         assert len(self.armazenamento.armazem) == 0
 
     def testGetSenhaEncriptada(self):
-        assert self.armazenamento.getSenhaEncriptadaPorEmail(self.login.email) == self.login.senhaEncriptada
+        assert self.armazenamento.getSenhaEncriptadaPorEmail(self.login.email) == self.login.senha

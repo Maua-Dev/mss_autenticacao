@@ -4,9 +4,9 @@ import re
 
 class Login(BaseModel):
     email: str
-    senhaEncriptada: str
+    senha: str
 
-    @validator('senhaEncriptada')
+    @validator('senha')
     def senhaNaoVazia(cls, v):
         if len(v) == 0:
             raise ValueError("Senha Vazia")
@@ -25,3 +25,4 @@ class Login(BaseModel):
         if not re.fullmatch(regex, v):
             raise ValueError("Email Invalido")
         return v
+
