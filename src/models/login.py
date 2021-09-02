@@ -1,10 +1,11 @@
 from pydantic import BaseModel, validator, ValidationError
 import re
-
+from devmaua.src.enum.roles import Roles
 
 class Login(BaseModel):
     email: str
     senha: str
+
 
     @validator('senha')
     def senhaNaoVazia(cls, v):
@@ -38,4 +39,4 @@ class Login(BaseModel):
 
             return login
         except:
-            raise Exception
+            raise ValueError("Requesicao invalida")
