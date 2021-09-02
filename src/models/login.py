@@ -26,3 +26,16 @@ class Login(BaseModel):
             raise ValueError("Email Invalido")
         return v
 
+
+    @staticmethod
+    def fromDict(d: dict):
+        try:
+            #TODO validar: talvez de so para deixar um **kargs e tirar esse metodo
+            login = Login(
+                email = d["email"],
+                senha = d["senha"]
+            )
+
+            return login
+        except:
+            raise Exception
