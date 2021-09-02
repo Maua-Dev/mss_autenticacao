@@ -1,7 +1,7 @@
 
 from abc import ABC, abstractmethod
 from src.models.login import Login
-
+from devmaua.src.enum.roles import Roles
 
 class IArmazenamento(ABC):
     """"
@@ -25,4 +25,8 @@ class IArmazenamento(ABC):
 
     @abstractmethod
     def getSenhaEncriptadaPorEmail(self, email: str):
+        pass
+
+    @abstractmethod
+    def atualizaRolePorEmail(self, email: str, roles: list[Roles]):
         pass

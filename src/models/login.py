@@ -5,7 +5,7 @@ from devmaua.src.enum.roles import Roles
 class Login(BaseModel):
     email: str
     senha: str
-
+    roles: list[Roles] = []
 
     @validator('senha')
     def senhaNaoVazia(cls, v):
@@ -40,3 +40,15 @@ class Login(BaseModel):
             return login
         except:
             raise ValueError("Requesicao invalida")
+
+    def atualizaRoles(self, roles: list[Roles]):
+        self.roles = roles
+
+    def rolesFromStrList(roles: list[str]):
+        returnRoles = []
+        try:
+            for role in roles:
+                returnRoles.append(Roles[role])
+        except:
+            raise ValueError("Role inexistente")
+        return returnRoles

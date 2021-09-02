@@ -1,3 +1,5 @@
+from devmaua.src.enum.roles import Roles
+
 from src.interfaces.i_armazenamento_auth import IArmazenamento
 from src.models.login import Login
 
@@ -39,3 +41,9 @@ class ArmazenamentoUsuarioVolatil(IArmazenamento):
             if l.email == email:
                 return l.senha
 
+    def atualizaRolePorEmail(self, email:str, roles: list[Roles]):
+        for l in self.armazem:
+            if l.email == email:
+                l.atualizaRoles(roles)
+                return True
+        return False

@@ -3,6 +3,7 @@ from src.repositorios.volatil.armazenamento_volatil import ArmazenamentoUsuarioV
 from src.models.login import Login
 from src.usecases.uc_usuario_auth import UCUsuarioAuth
 import bcrypt
+from devmaua.src.enum.roles import Roles
 
 
 class TestUCUsuarioAuth:
@@ -18,6 +19,13 @@ class TestUCUsuarioAuth:
         self.uc = UCUsuarioAuth(self.armazenamento)
         yield
         # Teardown
+
+    def testCadastraLoginLevantaErroComEmailIgual(self):
+        self.uc.cadastraLoginAuth(self.login)
+
+        with pytest.raises(Exception) as e:
+            self.uc.cadastraLoginAuth(self.login)
+
 
     def testCadastraLoginFazHashDaSenha(self):
         self.uc.cadastraLoginAuth(self.login)
@@ -39,3 +47,18 @@ class TestUCUsuarioAuth:
         self.uc.alteraSenha(Login(email=self.login.email, senha="SenhaAlterada"))
 
         assert bcrypt.checkpw("SenhaAlterada".encode(), self.armazenamento.armazem[0].senha.encode())
+
+    def testAtualizaRoles(self):
+        self.armazenamento.cadastrarLoginAuth(self.login)
+        padrao = self.armazenamento.armazem[0].roles == []
+
+        roles = [Roles.ALUNO, Roles.MONITOR_DISCIPLINA]
+
+        self.uc.atualizaRoles(self.login.email, roles)
+
+        esperado = self.armazenamento.armazem[0].roles == roles
+
+        print()
+        print(self.armazenamento.armazem)
+
+        assert padrao and esperado
