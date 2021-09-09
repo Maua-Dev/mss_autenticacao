@@ -3,6 +3,7 @@ from src.repositorios.volatil.armazenamento_volatil import ArmazenamentoUsuarioV
 from src.models.login import Login
 from src.usecases.uc_login import UCLogin
 import bcrypt
+from src.usecases.errors.erros_uc import ErroEmailEOuSenhaIncorretos
 
 
 class TestUCLogin:
@@ -25,9 +26,11 @@ class TestUCLogin:
         assert self.uc.autenticaLogin(loginCorreto)
 
     def testFalhaNoEmail(self):
-        loginEmailErrado = Login(email="17.01234-5@maua.br", senha="senha")
-        assert not self.uc.autenticaLogin(loginEmailErrado)
+        with pytest.raises(ErroEmailEOuSenhaIncorretos):
+            loginEmailErrado = Login(email="17.01234-5@maua.br", senha="senha")
+            self.uc.autenticaLogin(loginEmailErrado)
 
     def testFalhaNaSenha(self):
-        loginSenhaErrada = Login(email="18.01234-5@maua.br", senha="sEnha")
-        assert not self.uc.autenticaLogin(loginSenhaErrada)
+        with pytest.raises(ErroEmailEOuSenhaIncorretos):
+            loginSenhaErrada = Login(email="18.01234-5@maua.br", senha="sEnha")
+            self.uc.autenticaLogin(loginSenhaErrada)

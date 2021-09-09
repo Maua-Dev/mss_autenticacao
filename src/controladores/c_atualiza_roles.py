@@ -2,6 +2,9 @@ from src.interfaces.i_armazenamento_auth import IArmazenamento
 from src.usecases.uc_usuario_auth import UCUsuarioAuth
 from fastapi import Response
 from src.models.login import Login
+from src.repositorios.erros.erros_volatil import ErroEmailNaoEncontrado
+from http import HTTPStatus
+from src.models.erros.erros_models import ErroEmailVazio, ErroEmailInvalido, ErroSenhaVazio, ErroConversaoRequestLogin, ErroConversaoStrRole
 
 
 class CAtualizarRolesFastApi():
@@ -13,6 +16,7 @@ class CAtualizarRolesFastApi():
         self.uc = UCUsuarioAuth(self.repo)
 
     def __call__(self, body: dict):
+        #TODO considerar passar list de int em vez de string
         """
         Estrutura do body:
         {
@@ -26,8 +30,11 @@ class CAtualizarRolesFastApi():
 
             return Response(content="atualizado com sucesso", status_code=200)
 
-        # TODO Considerar: Adicionar tipo enum para status codes e erros para auth
-        except ValueError as e:
-            return Response(content="Erro na requisicao", status_code=400)
+        except ErroEmailNaoEncontrado as e:
+            return Response(content=str(e), status_code=HTTPStatus.NOT_FOUND)
+
+        except ErroConversaoStrRole as e:
+            return Response(content=str(e), status_code=HTTPStatus.BAD_REQUEST)
+
         except Exception:
-            return Response(content="Erro", status_code=500)
+            return Response(content="Erro inesperado", status_code=HTTPStatus.INTERNAL_SERVER_ERROR)

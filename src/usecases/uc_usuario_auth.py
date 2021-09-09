@@ -2,7 +2,7 @@ from src.interfaces.i_armazenamento_auth import IArmazenamento
 from src.models.login import Login
 import bcrypt
 from devmaua.src.enum.roles import Roles
-
+from .errors.erros_uc import *
 
 class UCUsuarioAuth:
     armazenamento: IArmazenamento
@@ -12,9 +12,9 @@ class UCUsuarioAuth:
 
     def cadastraLoginAuth(self, login: Login):
         if self.armazenamento.emailExiste(login.email):
-            raise Exception
+            raise ErroEmailJaCadastrado
 
-        #Faz decode do hash para salvar no db como string
+        #Faz decode() do hash para salvar no db como string e nao byte
         loginEncriptado = Login(email=login.email, senha=self._encriptaSenha(login.senha).decode())
         self.armazenamento.cadastrarLoginAuth(loginEncriptado)
 
@@ -28,6 +28,9 @@ class UCUsuarioAuth:
 
     def atualizaRoles(self, email: str, roles: list[Roles]):
         self.armazenamento.atualizaRolePorEmail(email, roles)
+
+    def getRolesPorEmail(self, email: str):
+        return self.armazenamento.getRolesPorEmail(email)
 
     def _encriptaSenha(self, senha: str):
         salt = bcrypt.gensalt()

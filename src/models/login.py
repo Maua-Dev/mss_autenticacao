@@ -2,6 +2,12 @@ from pydantic import BaseModel, validator, ValidationError
 import re
 from devmaua.src.enum.roles import Roles
 
+from .erros.erros_models import ErroEmailInvalido
+from .erros.erros_models import ErroEmailVazio
+from .erros.erros_models import ErroSenhaVazio
+from .erros.erros_models import ErroConversaoRequestLogin
+from .erros.erros_models import ErroConversaoStrRole
+
 class Login(BaseModel):
     email: str
     senha: str
@@ -10,13 +16,13 @@ class Login(BaseModel):
     @validator('senha')
     def senhaNaoVazia(cls, v):
         if len(v) == 0:
-            raise ValueError("Senha Vazia")
+            raise ErroSenhaVazio
         return v
 
     @validator('email')
     def emailNaoVazio(cls, v):
         if len(v) == 0:
-            raise ValueError("Email Vazio")
+            raise ErroEmailVazio
         return v
 
     @validator('email')
@@ -24,7 +30,7 @@ class Login(BaseModel):
         regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 
         if not re.fullmatch(regex, v):
-            raise ValueError("Email Invalido")
+            raise ErroEmailInvalido
         return v
 
 
@@ -33,13 +39,16 @@ class Login(BaseModel):
         try:
             #TODO validar: talvez de so para deixar um **kargs e tirar esse metodo
             login = Login(
-                email = d["email"],
-                senha = d["senha"]
+                email=d["email"],
+                senha=d["senha"]
             )
 
             return login
+
+        except(ErroEmailVazio, ErroEmailInvalido, ErroSenhaVazio) as e:
+            raise e
         except:
-            raise ValueError("Requesicao invalida")
+            raise ErroConversaoRequestLogin
 
     def atualizaRoles(self, roles: list[Roles]):
         self.roles = roles
@@ -48,7 +57,7 @@ class Login(BaseModel):
         returnRoles = []
         try:
             for role in roles:
-                returnRoles.append(Roles[role])
+                returnRoles.append(Roles[role.upper()])
         except:
-            raise ValueError("Role inexistente")
+            raise ErroConversaoStrRole()
         return returnRoles

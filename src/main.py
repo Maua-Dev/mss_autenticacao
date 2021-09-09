@@ -16,8 +16,8 @@ armazenamento = ArmazenamentoUsuarioVolatil()
 auth = AuthJWT()
 
 controllerGerarToken = CGerarTokenFastAPI(auth)
-# controllerLogin = CLogarFastApi(armazenamento, auth)
-controllerLogin = CLogarFastApi(armazenamento)
+controllerLogin = CLogarFastApi(armazenamento, auth)
+# controllerLogin = CLogarFastApi(armazenamento)
 controllerCadastrarLoginAuth = CCadastrarLoginAuthFastApi(armazenamento)
 controllerAtualizarRoles = CAtualizarRolesFastApi(armazenamento)
 

@@ -17,7 +17,20 @@ class ErroAlgoritmoVazio(Exception):
 class ErroSenhaVazio(Exception):
     def __init__(self):
         super().__init__("Senha enviada está vazia!")
-        
-class ErroSenhaVazio(Exception):
+
+class ErroEmailVazio(Exception):
     def __init__(self):
-        super().__init__("Senha enviada está vazia!")
+        super().__init__("Email está vazio")
+
+class ErroEmailInvalido(Exception): # Estrutura mail@mail.com
+    def __init__(self):
+        super().__init__("Email invalido")
+
+class ErroConversaoRequestLogin(Exception):
+    def __init__(self):
+        super().__init__("Nao foi possivel converter a requisicao para um login")
+
+class ErroConversaoStrRole(Exception):
+    def __init__(self):
+        super().__init__("Nao foi possivel converter a lista de str para roles")
+
