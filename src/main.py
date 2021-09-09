@@ -40,8 +40,6 @@ async def cadastrarLogin(request: Request):
 
 @app.post("/atualiza/roles")
 async def atualizarRoles(request: Request):
-    print("Request ===========")
-    print(await request.body())
     return controllerAtualizarRoles(await request.json())
 
 @app.get("/get")

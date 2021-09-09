@@ -58,7 +58,4 @@ class TestUCUsuarioAuth:
 
         esperado = self.armazenamento.armazem[0].roles == roles
 
-        print()
-        print(self.armazenamento.armazem)
-
         assert padrao and esperado

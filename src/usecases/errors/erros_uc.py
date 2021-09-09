@@ -12,4 +12,4 @@ class ErroEmailEOuSenhaIncorretos(Exception):
 
 class ErroEmailJaCadastrado(Exception):
     def __init__(self):
-        super().__init__("O email e/ou a senha estao incorretos")
+        super().__init__("O email ja foi cadastrado")
