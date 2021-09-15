@@ -26,10 +26,6 @@ async def root():
     return {"mss": "autenticacao",
             "porta": 8080}
 
-@app.post("/token")
-async def gerarToken(request: Request):
-    return controllerGerarToken(await request.json())
-
 @app.post("/login")
 async def logar(request: Request):
     return controllerLogin(await request.json())
@@ -41,7 +37,3 @@ async def cadastrarLogin(request: Request):
 @app.post("/atualiza/roles")
 async def atualizarRoles(request: Request):
     return controllerAtualizarRoles(await request.json())
-
-@app.get("/get")
-async def getArmazem(request: Request):
-    return print(armazenamento.armazem)
