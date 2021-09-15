@@ -1,25 +1,24 @@
 from fastapi import FastAPI, Request
 
-from src.controladores.c_gerar_token_fastapi import CGerarTokenFastAPI
+from src.controladores.fabrica.fabrica_controlador_fastapi import FabricaControladorFastAPI
 from src.repositorios.jwt.authJWT import AuthJWT
-from src.repositorios.oauth.authOAuth import AuthOAuth
-from src.repositorios.otp import authOTP
+
 from src.controladores.c_logar_fastapi import CLogarFastApi
 from src.repositorios.volatil.armazenamento_volatil import ArmazenamentoUsuarioVolatil
-from src.usecases.uc_criar_token import UCCriarToken
 from src.controladores.c_cadastrar_login_auth_fastapi import CCadastrarLoginAuthFastApi
 from src.controladores.c_atualiza_roles import CAtualizarRolesFastApi
+
 
 app = FastAPI()
 
 armazenamento = ArmazenamentoUsuarioVolatil()
 auth = AuthJWT()
 
-controllerGerarToken = CGerarTokenFastAPI(auth)
 controllerLogin = CLogarFastApi(armazenamento, auth)
-# controllerLogin = CLogarFastApi(armazenamento)
 controllerCadastrarLoginAuth = CCadastrarLoginAuthFastApi(armazenamento)
 controllerAtualizarRoles = CAtualizarRolesFastApi(armazenamento)
+
+controladorJwt = FabricaControladorFastAPI(auth)
 
 @app.get("/")
 async def root():
@@ -37,3 +36,8 @@ async def cadastrarLogin(request: Request):
 @app.post("/atualiza/roles")
 async def atualizarRoles(request: Request):
     return controllerAtualizarRoles(await request.json())
+
+@app.post("/verificar")
+async def verificarToken(request: Request):
+    return controladorJwt.verificarToken(await request.body())
+

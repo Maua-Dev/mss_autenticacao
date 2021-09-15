@@ -4,3 +4,4 @@ venv/
 *.pem
 .env
 .vscode/
+.idea/vcs.xml
