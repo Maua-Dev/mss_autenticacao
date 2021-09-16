@@ -24,13 +24,16 @@ class ErroEmailVazio(Exception):
 
 class ErroEmailInvalido(Exception): # Estrutura mail@mail.com
     def __init__(self):
-        super().__init__("Email invalido")
+        super().__init__("Email inválido")
 
+
+# Esse erro não deve ser passado para o usuário final
 class ErroConversaoRequestLogin(Exception):
     def __init__(self):
-        super().__init__("Nao foi possivel converter a requisicao para um login")
+        super().__init__("Não foi possível converter a requisição para um login")
 
+# Esse erro não deve ser passado para o usuário final
 class ErroConversaoStrRole(Exception):
     def __init__(self):
-        super().__init__("Nao foi possivel converter a lista de str para roles")
+        super().__init__("Não foi possível converter a lista de roles para Roles")
 

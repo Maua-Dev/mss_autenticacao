@@ -1,15 +1,15 @@
 class ErroTokenInvalido(Exception):
     def __init__(self):
-        super().__init__("O token não é valido para o uso!")
+        super().__init__("O token não é válido para o uso!")
         
 class ErroChaveInvalido(Exception):
     def __init__(self):
-        super().__init__("A chave não é valida para o uso!")
+        super().__init__("A chave não é válida para o uso!")
 
 class ErroEmailEOuSenhaIncorretos(Exception):
     def __init__(self):
-        super().__init__("O email e/ou a senha estao incorretos")
+        super().__init__("O email e/ou a senha estão incorretos")
 
 class ErroEmailJaCadastrado(Exception):
     def __init__(self):
-        super().__init__("O email ja foi cadastrado")
+        super().__init__("O email já foi cadastrado anteriormente")
