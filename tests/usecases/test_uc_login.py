@@ -4,6 +4,7 @@ from src.models.login import Login
 from src.usecases.uc_login import UCLogin
 import bcrypt
 from src.usecases.erros.erros_uc import ErroEmailEOuSenhaIncorretos
+from src.controladores.hashing.bcrypt.c_operacoes_bcrypt import COperacoesBcrypt
 
 
 class TestUCLogin:
@@ -17,7 +18,7 @@ class TestUCLogin:
         self.armazenamento = ArmazenamentoUsuarioVolatil()
         self.login = Login(email="18.01234-5@maua.br", senha=bcrypt.hashpw(b"senha", bcrypt.gensalt()))
         self.armazenamento.cadastrarLoginAuth(login=self.login)
-        self.uc = UCLogin(self.armazenamento)
+        self.uc = UCLogin(self.armazenamento, COperacoesBcrypt)
         yield
         # Teardown
 

@@ -4,6 +4,8 @@ from src.models.login import Login
 from src.usecases.uc_usuario_auth import UCUsuarioAuth
 import bcrypt
 from devmaua.src.enum.roles import Roles
+from src.controladores.hashing.bcrypt.c_operacoes_bcrypt import COperacoesBcrypt
+
 
 
 class TestUCUsuarioAuth:
@@ -16,7 +18,7 @@ class TestUCUsuarioAuth:
         # setup
         self.armazenamento = ArmazenamentoUsuarioVolatil()
         self.login = Login(email="18.01234-5@maua.br", senha="senha")
-        self.uc = UCUsuarioAuth(self.armazenamento)
+        self.uc = UCUsuarioAuth(self.armazenamento, COperacoesBcrypt)
         yield
         # Teardown
 
