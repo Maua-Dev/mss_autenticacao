@@ -15,12 +15,7 @@ app = FastAPI()
 armazenamento = ArmazenamentoUsuarioVolatil()
 auth = AuthJWT()
 
-controllerHash = COperacoesBcrypt
-controllerLogin = CLogarFastApi(armazenamento, auth, COperacoesBcrypt)
-controllerCadastrarLoginAuth = CCadastrarLoginAuthFastApi(armazenamento, COperacoesBcrypt)
-controllerAtualizarRoles = CAtualizarRolesFastApi(armazenamento)
-
-controladorJwt = FabricaControladorFastAPI(auth)
+factory = FabricaControladorFastAPI(auth, armazenamento, COperacoesBcrypt)
 
 @app.get("/")
 async def root():
@@ -29,17 +24,14 @@ async def root():
 
 @app.post("/login")
 async def logar(request: Request):
-    return controllerLogin(await request.json())
+    return factory.logar(await request.json())
 
 @app.post("/cadastrar")
 async def cadastrarLogin(request: Request):
-    return controllerCadastrarLoginAuth(await request.json())
+    return factory.cadastrarLogin(await request.json())
 
 @app.post("/atualiza/roles")
 async def atualizarRoles(request: Request):
-    return controllerAtualizarRoles(await request.json())
+    return factory.atualizarRoles(await request.json())
 
-@app.post("/verificar")
-async def verificarToken(request: Request):
-    return controladorJwt.verificarToken(await request.body())
 
