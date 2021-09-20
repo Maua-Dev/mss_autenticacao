@@ -28,7 +28,7 @@ class IArmazenamento(ABC):
         pass
 
     @abstractmethod
-    def atualizaRolePorEmail(self, email: str, roles: list[Roles]):
+    def atualizarRolePorEmail(self, email: str, roles: list[Roles]):
         pass
 
     @abstractmethod

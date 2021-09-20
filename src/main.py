@@ -6,7 +6,7 @@ from src.repositorios.jwt.authJWT import AuthJWT
 from src.controladores.c_logar_fastapi import CLogarFastApi
 from src.repositorios.volatil.armazenamento_volatil import ArmazenamentoUsuarioVolatil
 from src.controladores.c_cadastrar_login_auth_fastapi import CCadastrarLoginAuthFastApi
-from src.controladores.c_atualiza_roles import CAtualizarRolesFastApi
+from src.controladores.c_atualizar_roles import CAtualizarRolesFastApi
 
 
 app = FastAPI()

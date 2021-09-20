@@ -40,7 +40,7 @@ class CLogarFastApi():
         try:
             login = Login.fromDict(body)
 
-            if self.ucLogin.autenticaLogin(login):
+            if self.ucLogin.autenticarLogin(login):
                 content = UCCriarToken(self.auth)(Token.fromDict(self._criarPayload(login.email)))
 
             #TODO Considerar trocar Response para um model response que tenha mensagem e codigo -> Paramos de depender do FastApi

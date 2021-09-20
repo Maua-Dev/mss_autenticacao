@@ -23,14 +23,14 @@ class TestUCLogin:
 
     def testPadraoPassa(self):
         loginCorreto = Login(email="18.01234-5@maua.br", senha="senha")
-        assert self.uc.autenticaLogin(loginCorreto)
+        assert self.uc.autenticarLogin(loginCorreto)
 
     def testFalhaNoEmail(self):
         with pytest.raises(ErroEmailEOuSenhaIncorretos):
             loginEmailErrado = Login(email="17.01234-5@maua.br", senha="senha")
-            self.uc.autenticaLogin(loginEmailErrado)
+            self.uc.autenticarLogin(loginEmailErrado)
 
     def testFalhaNaSenha(self):
         with pytest.raises(ErroEmailEOuSenhaIncorretos):
             loginSenhaErrada = Login(email="18.01234-5@maua.br", senha="sEnha")
-            self.uc.autenticaLogin(loginSenhaErrada)
+            self.uc.autenticarLogin(loginSenhaErrada)

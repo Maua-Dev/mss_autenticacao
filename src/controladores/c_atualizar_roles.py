@@ -26,7 +26,7 @@ class CAtualizarRolesFastApi():
         """
         try:
             roles = Login.rolesFromStrList(roles=body["roles"])
-            self.uc.atualizaRoles(email=body["email"], roles=roles)
+            self.uc.atualizarRoles(email=body["email"], roles=roles)
 
             return Response(content="atualizado com sucesso", status_code=200)
 

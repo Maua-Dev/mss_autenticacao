@@ -41,10 +41,10 @@ class ArmazenamentoUsuarioVolatil(IArmazenamento):
                 return l.senha
         raise ErroEmailNaoEncontrado
 
-    def atualizaRolePorEmail(self, email: str, roles: list[Roles]):
+    def atualizarRolePorEmail(self, email: str, roles: list[Roles]):
         for l in self.armazem:
             if l.email == email:
-                l.atualizaRoles(roles)
+                l.atualizarRoles(roles)
                 return True
         raise ErroEmailNaoEncontrado
 

@@ -21,21 +21,21 @@ class TestUCUsuarioAuth:
         # Teardown
 
     def testCadastraLoginLevantaErroComEmailIgual(self):
-        self.uc.cadastraLoginAuth(self.login)
+        self.uc.cadastrarLoginAuth(self.login)
 
         with pytest.raises(Exception) as e:
-            self.uc.cadastraLoginAuth(self.login)
+            self.uc.cadastrarLoginAuth(self.login)
 
 
     def testCadastraLoginFazHashDaSenha(self):
-        self.uc.cadastraLoginAuth(self.login)
+        self.uc.cadastrarLoginAuth(self.login)
         assert bcrypt.checkpw("senha".encode(), self.armazenamento.armazem[0].senha.encode())
 
     def testDeletaLoginPorEmail(self):
         self.armazenamento.cadastrarLoginAuth(self.login)
         adicionado = len(self.armazenamento.armazem) == 1
 
-        self.uc.deletaLoginPorEmail("18.01234-5@maua.br")
+        self.uc.deletarLoginPorEmail("18.01234-5@maua.br")
 
         deletado = len(self.armazenamento.armazem) == 0
 
@@ -44,7 +44,7 @@ class TestUCUsuarioAuth:
     def testAlteraSenhaFazHashDaSenha(self):
         self.armazenamento.cadastrarLoginAuth(self.login)
 
-        self.uc.alteraSenha(Login(email=self.login.email, senha="SenhaAlterada"))
+        self.uc.alterarSenha(Login(email=self.login.email, senha="SenhaAlterada"))
 
         assert bcrypt.checkpw("SenhaAlterada".encode(), self.armazenamento.armazem[0].senha.encode())
 
@@ -54,7 +54,7 @@ class TestUCUsuarioAuth:
 
         roles = [Roles.ALUNO, Roles.MONITOR_DISCIPLINA]
 
-        self.uc.atualizaRoles(self.login.email, roles)
+        self.uc.atualizarRoles(self.login.email, roles)
 
         esperado = self.armazenamento.armazem[0].roles == roles
 

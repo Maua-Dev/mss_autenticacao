@@ -26,7 +26,7 @@ class CCadastrarLoginAuthFastApi():
         try:
             login = Login.fromDict(body)
 
-            self.uc.cadastraLoginAuth(login)
+            self.uc.cadastrarLoginAuth(login)
 
             return Response(content="Cadastrado com sucesso", status_code=HTTPStatus.CREATED)
 

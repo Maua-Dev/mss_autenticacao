@@ -50,7 +50,7 @@ class Login(BaseModel):
         except:
             raise ErroConversaoRequestLogin
 
-    def atualizaRoles(self, roles: list[Roles]):
+    def atualizarRoles(self, roles: list[Roles]):
         self.roles = roles
 
     def rolesFromStrList(roles: list[str]):

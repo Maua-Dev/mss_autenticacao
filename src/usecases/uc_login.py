@@ -11,7 +11,7 @@ class UCLogin():
     def __init__(self, usuariosRepo: IArmazenamento):
         self.usuariosRepo = usuariosRepo
 
-    def autenticaLogin(self, login: Login):
+    def autenticarLogin(self, login: Login):
         if self.usuariosRepo.emailExiste(login.email):
             if bcrypt.checkpw(login.senha.encode(), self.usuariosRepo.getSenhaEncriptadaPorEmail(login.email).encode()):
                 return True

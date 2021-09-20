@@ -10,28 +10,28 @@ class UCUsuarioAuth:
     def __init__(self, armazenamento: IArmazenamento):
         self.armazenamento = armazenamento
 
-    def cadastraLoginAuth(self, login: Login):
+    def cadastrarLoginAuth(self, login: Login):
         if self.armazenamento.emailExiste(login.email):
             raise ErroEmailJaCadastrado
 
         #Faz decode() do hash para salvar no db como string e nao byte
-        loginEncriptado = Login(email=login.email, senha=self._encriptaSenha(login.senha).decode())
+        loginEncriptado = Login(email=login.email, senha=self._encriptarSenha(login.senha).decode())
         self.armazenamento.cadastrarLoginAuth(loginEncriptado)
 
-    def deletaLoginPorEmail(self, email: str):
+    def deletarLoginPorEmail(self, email: str):
         self.armazenamento.deletarLoginAuthPorEmail(email)
 
-    def alteraSenha(self, login: Login):
+    def alterarSenha(self, login: Login):
         #Faz decode do hash para salvar no db como string
-        loginEncriptado = Login(email=login.email, senha=self._encriptaSenha(login.senha).decode())
+        loginEncriptado = Login(email=login.email, senha=self._encriptarSenha(login.senha).decode())
         self.armazenamento.alterarSenha(loginEncriptado)
 
-    def atualizaRoles(self, email: str, roles: list[Roles]):
-        self.armazenamento.atualizaRolePorEmail(email, roles)
+    def atualizarRoles(self, email: str, roles: list[Roles]):
+        self.armazenamento.atualizarRolePorEmail(email, roles)
 
     def getRolesPorEmail(self, email: str):
         return self.armazenamento.getRolesPorEmail(email)
 
-    def _encriptaSenha(self, senha: str):
+    def _encriptarSenha(self, senha: str):
         salt = bcrypt.gensalt()
         return bcrypt.hashpw(senha.encode(), salt)
