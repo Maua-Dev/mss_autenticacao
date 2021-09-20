@@ -8,7 +8,7 @@ class ErroChaveInvalido(Exception):
 
 class ErroEmailEOuSenhaIncorretos(Exception):
     def __init__(self):
-        super().__init__("O email e/ou a senha estão incorretos")
+        super().__init__("Email ou senha incorretos")
 
 class ErroEmailJaCadastrado(Exception):
     def __init__(self):

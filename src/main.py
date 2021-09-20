@@ -3,10 +3,11 @@ from fastapi import FastAPI, Request
 from src.controladores.fabrica.fabrica_controlador_fastapi import FabricaControladorFastAPI
 from src.repositorios.jwt.authJWT import AuthJWT
 
-from src.controladores.c_logar_fastapi import CLogarFastApi
+from src.controladores.fastapi.c_logar_fastapi import CLogarFastApi
 from src.repositorios.volatil.armazenamento_volatil import ArmazenamentoUsuarioVolatil
-from src.controladores.c_cadastrar_login_auth_fastapi import CCadastrarLoginAuthFastApi
-from src.controladores.c_atualizar_roles import CAtualizarRolesFastApi
+from src.controladores.fastapi.c_cadastrar_login_auth_fastapi import CCadastrarLoginAuthFastApi
+from src.controladores.fastapi.c_atualizar_roles import CAtualizarRolesFastApi
+from src.controladores.hashing.bcrypt.c_operacoes_bcrypt import COperacoesBcrypt
 
 
 app = FastAPI()
@@ -14,8 +15,9 @@ app = FastAPI()
 armazenamento = ArmazenamentoUsuarioVolatil()
 auth = AuthJWT()
 
-controllerLogin = CLogarFastApi(armazenamento, auth)
-controllerCadastrarLoginAuth = CCadastrarLoginAuthFastApi(armazenamento)
+controllerHash = COperacoesBcrypt
+controllerLogin = CLogarFastApi(armazenamento, auth, COperacoesBcrypt)
+controllerCadastrarLoginAuth = CCadastrarLoginAuthFastApi(armazenamento, COperacoesBcrypt)
 controllerAtualizarRoles = CAtualizarRolesFastApi(armazenamento)
 
 controladorJwt = FabricaControladorFastAPI(auth)

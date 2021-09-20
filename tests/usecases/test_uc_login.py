@@ -3,7 +3,7 @@ from src.repositorios.volatil.armazenamento_volatil import ArmazenamentoUsuarioV
 from src.models.login import Login
 from src.usecases.uc_login import UCLogin
 import bcrypt
-from src.usecases.errors.erros_uc import ErroEmailEOuSenhaIncorretos
+from src.usecases.erros.erros_uc import ErroEmailEOuSenhaIncorretos
 
 
 class TestUCLogin:

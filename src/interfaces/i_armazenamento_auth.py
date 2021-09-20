@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from src.models.login import Login
 from devmaua.src.enum.roles import Roles
 
+
 class IArmazenamento(ABC):
     """"
     Interface com os métodos necessários para o gerenciamento de usuários na autenticação
@@ -16,7 +17,7 @@ class IArmazenamento(ABC):
         pass
 
     @abstractmethod
-    def alterarSenha(self, login: str):
+    def alterarSenha(self, login: Login):
         pass
 
     @abstractmethod

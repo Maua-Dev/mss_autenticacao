@@ -7,9 +7,10 @@ from src.usecases.uc_criar_token import UCCriarToken
 from src.interfaces.i_auth import IAuth
 from http import HTTPStatus
 from src.models.erros.erros_models import ErroEmailVazio, ErroEmailInvalido, ErroSenhaVazio, ErroConversaoRequestLogin, ErroConversaoStrRole
-from src.usecases.errors.erros_uc import ErroEmailEOuSenhaIncorretos
+from src.usecases.erros.erros_uc import ErroEmailEOuSenhaIncorretos
 from src.repositorios.erros.erros_volatil import ErroEmailNaoEncontrado
 from src.models.token import Token
+from src.interfaces.i_operacoes_hash import IOperacoesHash
 
 
 class CLogarFastApi():
@@ -18,10 +19,10 @@ class CLogarFastApi():
     ucRepo: UCUsuarioAuth
     auth: IAuth
 
-    def __init__(self, repo: IArmazenamento, auth: IAuth):
+    def __init__(self, repo: IArmazenamento, auth: IAuth, iHash: IOperacoesHash):
         self.repo = repo
-        self.ucLogin = UCLogin(self.repo)
-        self.ucRepo = UCUsuarioAuth(self.repo)
+        self.ucLogin = UCLogin(self.repo, iHash)
+        self.ucRepo = UCUsuarioAuth(self.repo, iHash)
         self.auth = auth
 
     # def __init__(self, repo: IArmazenamento):

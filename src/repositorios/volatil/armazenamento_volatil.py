@@ -4,6 +4,7 @@ from src.interfaces.i_armazenamento_auth import IArmazenamento
 from src.models.login import Login
 from src.repositorios.erros.erros_volatil import ErroEmailNaoEncontrado
 
+
 class ArmazenamentoUsuarioVolatil(IArmazenamento):
 
     armazem: list[Login]
