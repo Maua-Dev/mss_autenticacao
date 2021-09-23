@@ -5,3 +5,4 @@ venv/
 .env
 .vscode/
 .idea/vcs.xml
+.idea/

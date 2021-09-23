@@ -2,7 +2,7 @@ from src.models.chave import Chave
 
 from src.interfaces.i_auth import IAuth
 
-from src.usecases.errors.erros_uc import ErroChaveInvalido
+from src.usecases.erros.erros_uc import ErroChaveInvalido
 
 
 class UCCriarChave():

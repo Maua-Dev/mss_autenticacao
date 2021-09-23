@@ -26,4 +26,3 @@ class CGerarTokenFastAPI():
             response = Response(content="Error", status_code=400)
             
         return response
-    

@@ -2,7 +2,7 @@ from src.models.token import Token
 
 from src.interfaces.i_auth import IAuth
 
-from src.usecases.errors.erros_uc import ErroTokenInvalido
+from src.usecases.erros.erros_uc import ErroTokenInvalido
 
 class UCCriarToken():
 

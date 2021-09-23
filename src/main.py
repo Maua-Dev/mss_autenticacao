@@ -1,24 +1,37 @@
-from src.controladores import fabrica
 from fastapi import FastAPI, Request
 
 from src.controladores.fabrica.fabrica_controlador_fastapi import FabricaControladorFastAPI
 from src.repositorios.jwt.authJWT import AuthJWT
-from src.repositorios.oauth.authOAuth import AuthOAuth
-from src.repositorios.otp import authOTP
+
+from src.controladores.fastapi.c_logar_fastapi import CLogarFastApi
+from src.repositorios.volatil.armazenamento_volatil import ArmazenamentoUsuarioVolatil
+from src.controladores.fastapi.c_cadastrar_login_auth_fastapi import CCadastrarLoginAuthFastApi
+from src.controladores.fastapi.c_atualizar_roles import CAtualizarRolesFastApi
+from src.controladores.hashing.bcrypt.c_operacoes_bcrypt import COperacoesBcrypt
+
 
 app = FastAPI()
 
-controlador = FabricaControladorFastAPI(AuthJWT())
+armazenamento = ArmazenamentoUsuarioVolatil()
+auth = AuthJWT()
+
+factory = FabricaControladorFastAPI(auth, armazenamento, COperacoesBcrypt)
 
 @app.get("/")
 async def root():
     return {"mss": "autenticacao",
             "porta": 8080}
 
-@app.post("/token")
-async def gerarToken(request: Request):
-    return controlador.gerarToken(await request.json())
+@app.post("/login")
+async def logar(request: Request):
+    return factory.logar(await request.json())
 
-@app.post("/verificar")
-async def verificarToken(request: Request):
-    return controlador.verificarToken(await request.body())
+@app.post("/cadastrar")
+async def cadastrarLogin(request: Request):
+    return factory.cadastrarLogin(await request.json())
+
+@app.post("/atualiza/roles")
+async def atualizarRoles(request: Request):
+    return factory.atualizarRoles(await request.json())
+
+
