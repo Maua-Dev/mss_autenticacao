@@ -35,3 +35,8 @@ class IArmazenamento(ABC):
     @abstractmethod
     def getRolesPorEmail(self, email: str):
         pass
+    
+    @abstractmethod
+    def pedidoRecuperarSenha(self, email: str):
+        pass
+    
