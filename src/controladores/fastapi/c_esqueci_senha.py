@@ -9,6 +9,8 @@ from src.interfaces.i_armazenamento_auth import IArmazenamento
 from src.usecases.uc_esqueci_senha import UCEsqueciSenha
 from src.usecases.uc_criar_token import UCCriarToken
 
+from src.models.erros.erros_models import  ErroEmailInvalido, ErroEmailVazio
+
 from fastapi import Response
 
 from http import HTTPStatus
@@ -23,17 +25,13 @@ class CEsqueciSenhaFastAPI():
         
     def __call__(self, body: dict):
         try:
-
-            if (self.repo.emailExiste(body["email"])):
-                token = Token.fromDict(self._criarPayload(body["email"]))
-                content = UCCriarToken(self.auth)(token)
-                response = Response(content=str(content), status_code=HTTPStatus.ACCEPTED)
-            else:
-                response = Response(content="Email não encontrado ou não existe.", status_code=400)
+            content = UCEsqueciSenha(self.repo, self.auth)(body["email"])
+            response = Response(content=content, status_code=HTTPStatus.ACCEPTED)
+        except ErroEmailInvalido:
+            response = Response(content="Esse email não existe", status_code=400)
+        except ErroEmailVazio:
+            response = Response(content="Recebido valor vazio. Favor digite um email.", status_code=400)
         except:
-            response = Response(content="Error", status_code=400)
+            response = Response(content="error undefined", status_code=400)
             
         return response
-
-    def _criarPayload(self, email: str):
-        return {"payload": {"email": str(email)}}
