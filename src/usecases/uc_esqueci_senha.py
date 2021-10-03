@@ -1,7 +1,7 @@
 from src.repositorios.erros.erros_volatil import ErroEmailNaoEncontrado
 from src.interfaces.i_armazenamento_auth import IArmazenamento
 
-class UCPedidoRecuperarSenha():
+class UCEsqueciSenha():
 
     auth : IArmazenamento
     
