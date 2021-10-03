@@ -34,4 +34,8 @@ async def cadastrarLogin(request: Request):
 async def atualizarRoles(request: Request):
     return factory.atualizarRoles(await request.json())
 
+@app.post("/esquecisenha")
+async def esqueciSenha(request: Request):
+    return factory.esqueciSenha(await request.json())
+
 
