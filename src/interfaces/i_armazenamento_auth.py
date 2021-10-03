@@ -35,8 +35,3 @@ class IArmazenamento(ABC):
     @abstractmethod
     def getRolesPorEmail(self, email: str):
         pass
-    
-    @abstractmethod
-    def esqueciSenha(self, email: str):
-        pass
-    
