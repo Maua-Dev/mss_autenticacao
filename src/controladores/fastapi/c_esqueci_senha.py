@@ -23,8 +23,9 @@ class CEsqueciSenhaFastAPI():
         
     def __call__(self, body: dict):
         try:
+
             if (self.repo.emailExiste(body["email"])):
-                token = Token.fromDict(body)
+                token = Token.fromDict(self._criarPayload(body["email"]))
                 content = UCCriarToken(self.auth)(token)
                 response = Response(content=str(content), status_code=HTTPStatus.ACCEPTED)
             else:
@@ -33,3 +34,6 @@ class CEsqueciSenhaFastAPI():
             response = Response(content="Error", status_code=400)
             
         return response
+
+    def _criarPayload(self, email: str):
+        return {"payload": {"email": str(email)}}
