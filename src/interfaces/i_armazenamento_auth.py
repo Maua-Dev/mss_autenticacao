@@ -37,6 +37,6 @@ class IArmazenamento(ABC):
         pass
     
     @abstractmethod
-    def pedidoRecuperarSenha(self, email: str):
+    def esqueciSenha(self, email: str):
         pass
     

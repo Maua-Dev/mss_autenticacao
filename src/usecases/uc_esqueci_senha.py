@@ -11,4 +11,4 @@ class UCPedidoRecuperarSenha():
     def __call__(self, email: str):
         if self.auth.emailExiste(email):
             raise ErroEmailNaoEncontrado
-        return self.auth.pedidoRecuperarSenha(email)
+        return self.auth.esqueciSenha(email)
