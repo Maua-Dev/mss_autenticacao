@@ -1,3 +1,4 @@
+from src.controladores.fastapi.c_alterar_senha import CAlterarSenhaFastApi
 from src.controladores.fastapi.c_esqueci_senha import CEsqueciSenhaFastAPI
 from src.controladores.fastapi.c_gerar_token_fastapi import CGerarTokenFastAPI
 from src.controladores.fastapi.c_verificar_token_fastapi import CVerificarTokenFastAPI
@@ -37,3 +38,6 @@ class FabricaControladorFastAPI:
     
     def esqueciSenha(self, body: dict):
         return CEsqueciSenhaFastAPI(self.repo, self.iauth)(body)
+    
+    def alterarSenha(self, body: dict):
+        return CAlterarSenhaFastApi(self.repo, self.iauth, self.iHash)(body)
