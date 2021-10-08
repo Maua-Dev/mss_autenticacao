@@ -38,4 +38,8 @@ async def atualizarRoles(request: Request):
 async def esqueciSenha(request: Request):
     return factory.esqueciSenha(await request.json())
 
+@app.post("/alterarsenha")
+async def esqueciSenha(request: Request):
+    return factory.alterarSenha(await request.json())
+
 
