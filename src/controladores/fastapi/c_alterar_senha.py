@@ -1,5 +1,6 @@
 from http import HTTPStatus
-from fastapi import responses
+from fastapi import Response
+from pydantic.errors import EmailError
 from src.interfaces.i_armazenamento_auth import IArmazenamento
 from src.models.login import Login
 from src.repositorios.erros.erros_volatil import ErroEmailNaoEncontrado
@@ -34,10 +35,11 @@ class CAlterarSenhaFastApi():
             if body["email"] == token["email"]:
                 login = Login.fromDict({"email":body["email"], "senha":body["novasenha"]})
                 self.uc.alterarSenha(login)
-                return responses(content="Senha atualizada com successo", status_code=HTTPStatus.ACCEPTED)
+                return Response(content="Senha atualizada com successo", status_code=HTTPStatus.ACCEPTED)
             else:
-                return responses(content="Email não encontrado", status_code=HTTPStatus.BAD_REQUEST)
+                return Response(content="Email não bate", status_code=HTTPStatus.BAD_REQUEST)
+            
         except ErroEmailNaoEncontrado:
-            return responses(content="Erro - Email não encontrado", status_code=HTTPStatus.INTERNAL_SERVER_ERROR)
+            return Response(content="Erro - Email não encontrado", status_code=HTTPStatus.INTERNAL_SERVER_ERROR)
         except Exception:
-            return responses(content="Erro inesperado", status_code=HTTPStatus.INTERNAL_SERVER_ERROR)
+            return Response(content="Erro inesperado", status_code=HTTPStatus.INTERNAL_SERVER_ERROR)
