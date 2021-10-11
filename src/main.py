@@ -37,7 +37,7 @@ async def atualizarRoles(request: Request):
 
 @app.post("/esquecisenha")
 async def esqueciSenha(esqueciSenha: EsqueciSenha):
-    return factory.esqueciSenha(esqueciSenha.email)
+    return factory.esqueciSenha(esqueciSenha)
 
 @app.post("/alterarsenha")
 async def esqueciSenha(alterarSenha: AlterarSenha):
