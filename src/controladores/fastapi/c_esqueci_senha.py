@@ -11,9 +11,8 @@ from src.usecases.uc_criar_token import UCCriarToken
 
 from src.models.erros.erros_models import  ErroEmailInvalido, ErroEmailVazio
 
-from fastapi import Response
+from fastapi import Response, status
 
-from http import HTTPStatus
 
 class CEsqueciSenhaFastAPI():
     
@@ -26,12 +25,12 @@ class CEsqueciSenhaFastAPI():
     def __call__(self, body: dict):
         try:
             content = UCEsqueciSenha(self.repo, self.auth)(body["email"])
-            response = Response(content=content, status_code=HTTPStatus.ACCEPTED)
+            response = Response(content=content, status_code=status.HTTP_204_NO_CONTENT)
         except ErroEmailInvalido:
-            response = Response(content="Esse email não existe", status_code=400)
+            response = Response(content="Esse email não existe", status_code=status.HTTP_404_NOT_FOUND)
         except ErroEmailVazio:
-            response = Response(content="Recebido valor vazio. Favor digite um email.", status_code=400)
+            response = Response(content="Recebido valor vazio. Favor digite um email.", status_code=status.HTTP_404_NOT_FOUND)
         except:
-            response = Response(content="error undefined", status_code=400)
+            response = Response(content="error undefined", status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
             
         return response
