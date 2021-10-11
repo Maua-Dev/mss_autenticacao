@@ -7,6 +7,8 @@ from src.usecases.uc_usuario_auth import UCUsuarioAuth
 from src.interfaces.i_auth import IAuth
 from src.interfaces.i_operacoes_hash import IOperacoesHash
 
+from src.controladores.fastapi.http.requisicoes import AlterarSenha
+
 
 class CAlterarSenhaFastApi():
     repo: IArmazenamento
@@ -19,22 +21,14 @@ class CAlterarSenhaFastApi():
         self.iHash = iHash
         self.uc = UCUsuarioAuth(self.repo, iHash)
         
-    def __call__(self, body: dict):
-        """
-        Estrutura do body:
-        {
-            'token': Token
-            'email': str
-            'novasenha' : str
-        }
-        """
+    def __call__(self, alterarSenha: AlterarSenha):
         
         try:
-            token = self.auth.verificarToken(body["token"])
-            if body["email"] == token["email"]:
-                login = Login.fromDict({"email":body["email"], "senha":body["novasenha"]})
+            token = self.auth.verificarToken(alterarSenha.token)
+            if alterarSenha.email == token["email"]:
+                login = Login.fromDict({"email":alterarSenha.email, "senha":alterarSenha.novasenha})
                 self.uc.alterarSenha(login)
-                return Response(content="Senha atualizada com successo", status_code=status.HTTP_204_NO_CONTENT)
+                return Response(content="Senha atualizada com successo", status_code=status.HTTP_202_ACCEPTED)
             else:
                 return Response(content="Email não bate", status_code=status.HTTP_400_BAD_REQUEST)
             

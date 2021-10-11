@@ -22,10 +22,10 @@ class CEsqueciSenhaFastAPI():
         self.repo = repo
         self.auth = auth
         
-    def __call__(self, body: dict):
+    def __call__(self, email: str):
         try:
-            content = UCEsqueciSenha(self.repo, self.auth)(body["email"])
-            response = Response(content=content, status_code=status.HTTP_204_NO_CONTENT)
+            content = UCEsqueciSenha(self.repo, self.auth)(email)
+            response = Response(content=content, status_code=status.HTTP_201_CREATED)
         except ErroEmailInvalido:
             response = Response(content="Esse email não existe", status_code=status.HTTP_404_NOT_FOUND)
         except ErroEmailVazio:
