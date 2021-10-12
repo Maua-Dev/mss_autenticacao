@@ -6,7 +6,7 @@ from src.repositorios.erros.erros_volatil import ErroEmailNaoEncontrado
 from src.usecases.uc_usuario_auth import UCUsuarioAuth
 from src.interfaces.i_auth import IAuth
 from src.interfaces.i_operacoes_hash import IOperacoesHash
-from src.repositorios.erros.erros_token import ErroCarregarEnv, ErroAssinaturaExpirada, ErroFalhaDecoder, ErroValidacao
+from src.repositorios.erros.erros_token import ErroAssinaturaExpirada, ErroFalhaDecoder, ErroValidacao
 
 from src.controladores.fastapi.http.requisicoes import ModeloAlterarSenha
 
