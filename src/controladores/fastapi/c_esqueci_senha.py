@@ -12,7 +12,7 @@ from src.usecases.uc_criar_token import UCCriarToken
 from src.models.erros.erros_models import  ErroEmailInvalido, ErroEmailVazio
 
 from fastapi import Response, status
-from src.controladores.fastapi.http.requisicoes import EsqueciSenha
+from src.controladores.fastapi.http.requisicoes import ModeloEsqueciSenha
 
 
 class CEsqueciSenhaFastAPI():
@@ -23,7 +23,7 @@ class CEsqueciSenhaFastAPI():
         self.repo = repo
         self.auth = auth
         
-    def __call__(self, esqueciSenha: EsqueciSenha):
+    def __call__(self, esqueciSenha: ModeloEsqueciSenha):
         try:
             content = UCEsqueciSenha(self.repo, self.auth)(esqueciSenha.email)
             response = Response(content=content, status_code=status.HTTP_202_ACCEPTED)

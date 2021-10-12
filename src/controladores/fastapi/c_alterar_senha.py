@@ -8,7 +8,7 @@ from src.interfaces.i_auth import IAuth
 from src.interfaces.i_operacoes_hash import IOperacoesHash
 from src.repositorios.erros.erros_token import ErroCarregarEnv, ErroAssinaturaExpirada, ErroFalhaDecoder, ErroValidacao
 
-from src.controladores.fastapi.http.requisicoes import AlterarSenha
+from src.controladores.fastapi.http.requisicoes import ModeloAlterarSenha
 
 
 class CAlterarSenhaFastApi():
@@ -22,7 +22,7 @@ class CAlterarSenhaFastApi():
         self.iHash = iHash
         self.uc = UCUsuarioAuth(self.repo, iHash)
         
-    def __call__(self, alterarSenha: AlterarSenha):
+    def __call__(self, alterarSenha: ModeloAlterarSenha):
         
         try:
             token = self.auth.verificarToken(alterarSenha.token)

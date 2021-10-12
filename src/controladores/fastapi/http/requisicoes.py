@@ -6,10 +6,10 @@ from pydantic import BaseModel
 class ReqExemplo(BaseModel):
     arg: Optional[str]
     
-class EsqueciSenha(BaseModel):
+class ModeloEsqueciSenha(BaseModel):
     email: str
     
-class AlterarSenha(BaseModel):
+class ModeloAlterarSenha(BaseModel):
     token: str
     email: str
     novasenha: str

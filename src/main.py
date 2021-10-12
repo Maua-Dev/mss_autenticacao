@@ -8,7 +8,7 @@ from src.repositorios.volatil.armazenamento_volatil import ArmazenamentoUsuarioV
 from src.controladores.fastapi.c_cadastrar_login_auth_fastapi import CCadastrarLoginAuthFastApi
 from src.controladores.fastapi.c_atualizar_roles import CAtualizarRolesFastApi
 from src.controladores.hashing.bcrypt.c_operacoes_bcrypt import COperacoesBcrypt
-from src.controladores.fastapi.http.requisicoes import EsqueciSenha, AlterarSenha
+from src.controladores.fastapi.http.requisicoes import ModeloEsqueciSenha, ModeloAlterarSenha
 
 
 app = FastAPI()
@@ -36,11 +36,11 @@ async def atualizarRoles(request: Request):
     return factory.atualizarRoles(await request.json())
 
 @app.post("/esquecisenha")
-async def esqueciSenha(esqueciSenha: EsqueciSenha):
+async def esqueciSenha(esqueciSenha: ModeloEsqueciSenha):
     return factory.esqueciSenha(esqueciSenha)
 
 @app.post("/alterarsenha")
-async def esqueciSenha(alterarSenha: AlterarSenha):
+async def esqueciSenha(alterarSenha: ModeloAlterarSenha):
     return factory.alterarSenha(alterarSenha)
 
 
