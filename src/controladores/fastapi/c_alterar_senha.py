@@ -6,6 +6,7 @@ from src.repositorios.erros.erros_volatil import ErroEmailNaoEncontrado
 from src.usecases.uc_usuario_auth import UCUsuarioAuth
 from src.interfaces.i_auth import IAuth
 from src.interfaces.i_operacoes_hash import IOperacoesHash
+from src.repositorios.erros.erros_token import ErroCarregarEnv, ErroAssinaturaExpirada, ErroFalhaDecoder, ErroValidacao
 
 from src.controladores.fastapi.http.requisicoes import AlterarSenha
 
@@ -30,8 +31,12 @@ class CAlterarSenhaFastApi():
                 self.uc.alterarSenha(login)
                 return Response(content="Senha atualizada com successo", status_code=status.HTTP_202_ACCEPTED)
             else:
-                return Response(content="Email não bate", status_code=status.HTTP_400_BAD_REQUEST)
+                return Response(content="Email não bate", status_code=status.HTTP_404_NOT_FOUND)
             
+        except ErroValidacao:
+            return Response(content="Token inválido. Tentativa de acessar o sistema registrado.", status_code=status.HTTP_403_FORBIDDEN)
+        except ErroAssinaturaExpirada:
+            return Response(content="Token expirado.", status_code=status.HTTP_504_GATEWAY_TIMEOUT)
         except ErroEmailNaoEncontrado:
             return Response(content="Erro - Email não encontrado", status_code=status.HTTP_404_NOT_FOUND)
         except Exception:
