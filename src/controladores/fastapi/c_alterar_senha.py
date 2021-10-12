@@ -40,4 +40,4 @@ class CAlterarSenhaFastApi():
         except ErroEmailNaoEncontrado:
             return Response(content="Erro - Email não encontrado", status_code=status.HTTP_404_NOT_FOUND)
         except Exception:
-            return Response(content="Erro inesperado", status_code=status.HTTP_404_NOT_FOUND)
+            return Response(content="Erro inesperado", status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)

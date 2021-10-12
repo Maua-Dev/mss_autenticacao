@@ -26,7 +26,7 @@ class CEsqueciSenhaFastAPI():
     def __call__(self, esqueciSenha: EsqueciSenha):
         try:
             content = UCEsqueciSenha(self.repo, self.auth)(esqueciSenha.email)
-            response = Response(content=content, status_code=status.HTTP_201_CREATED)
+            response = Response(content=content, status_code=status.HTTP_202_ACCEPTED)
         except ErroEmailInvalido:
             response = Response(content="Esse email não existe", status_code=status.HTTP_404_NOT_FOUND)
         except ErroEmailVazio:
