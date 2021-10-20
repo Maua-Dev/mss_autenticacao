@@ -34,4 +34,8 @@ async def cadastrarLogin(request: Request):
 async def atualizarRoles(request: Request):
     return factory.atualizarRoles(await request.json())
 
+@app.get("/validar")
+async def atualizarRoles(request: Request):
+    token = request.headers['Authorization'].split()[1]
+    return factory.verificarToken(token)
 

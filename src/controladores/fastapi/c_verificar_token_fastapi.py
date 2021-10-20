@@ -6,7 +6,8 @@ from src.usecases.uc_verificar_token import UCVerificarToken
 
 from fastapi import Response
 
-class CVerificarTokenFastAPI():
+
+class CVerificarTokenFastAPI:
     auth: IAuth
 
     def __init__(self, auth: IAuth):
@@ -16,8 +17,8 @@ class CVerificarTokenFastAPI():
         try:
             content = UCVerificarToken(self.auth)(body)
             response = Response(content=str(content), status_code=200)
-        except:
-            response = Response(content="Error", status_code=400)
+        except Exception as e:
+            response = Response(content="Erro Auth", status_code=401)
 
         return response
 
