@@ -10,9 +10,10 @@ from src.usecases.uc_criar_token import UCCriarToken
 
 from fastapi import Response
 
+
 class CGerarTokenFastAPI():
     
-    auth : IAuth
+    auth: IAuth
     
     def __init__(self, auth: IAuth):
         self.auth = auth

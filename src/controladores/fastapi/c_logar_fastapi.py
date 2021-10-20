@@ -31,6 +31,7 @@ class CLogarFastApi():
     #     self.ucRepo = UCUsuarioAuth(self.repo)
 
     def __call__(self, body: dict):
+
         """
         Estrutura do body:
         {

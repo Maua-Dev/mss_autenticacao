@@ -16,6 +16,7 @@ class CAtualizarRolesFastApi():
         self.uc = UCUsuarioAuth(self.repo)
 
     def __call__(self, body: dict):
+
         #TODO considerar passar list de int em vez de string
         """
         Estrutura do body:
