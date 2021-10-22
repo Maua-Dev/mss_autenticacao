@@ -12,6 +12,7 @@ from src.interfaces.i_operacoes_hash import IOperacoesHash
 from src.config.enums.fastapi import *
 from src.config.proj_config import ProjConfig
 from src.controladores.fastapi.roteadores.roteador import Roteador
+from src.controladores.fastapi.start import Start
 
 
 class FabricaControladorFastAPI:
@@ -57,3 +58,6 @@ class FabricaControladorFastAPI:
 
     def atualizarRoles(self, body: str):
         return CAtualizarRolesFastApi(self.repo)(body)
+
+    def start(self):
+        return Start()
