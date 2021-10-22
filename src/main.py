@@ -1,12 +1,9 @@
 from fastapi import FastAPI, Request
 
-from src.controladores.fabrica.fabrica_controlador_fastapi import FabricaControladorFastAPI
+from src.fabricas.controladores.fastapi.fabrica_controlador_fastapi import FabricaControladorFastAPI
 from src.repositorios.jwt.authJWT import AuthJWT
 
-from src.controladores.fastapi.c_logar_fastapi import CLogarFastApi
 from src.repositorios.volatil.armazenamento_volatil import ArmazenamentoUsuarioVolatil
-from src.controladores.fastapi.c_cadastrar_login_auth_fastapi import CCadastrarLoginAuthFastApi
-from src.controladores.fastapi.c_atualizar_roles import CAtualizarRolesFastApi
 from src.controladores.hashing.bcrypt.c_operacoes_bcrypt import COperacoesBcrypt
 
 
