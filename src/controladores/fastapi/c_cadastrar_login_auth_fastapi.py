@@ -17,6 +17,7 @@ class CCadastrarLoginAuthFastApi():
         self.uc = UCUsuarioAuth(self.repo, iHash)
 
     def __call__(self, body: dict):
+
         """
         Estrutura do body:
         {
