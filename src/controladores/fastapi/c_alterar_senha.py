@@ -29,7 +29,7 @@ class CAlterarSenhaFastApi():
             if alterarSenha.email == token["email"]:
                 login = Login.fromDict({"email":alterarSenha.email, "senha":alterarSenha.novasenha})
                 self.uc.alterarSenha(login)
-                return Response(content="Senha atualizada com successo", status_code=status.HTTP_202_ACCEPTED)
+                return Response(content="Senha atualizada com successo", status_code=status.HTTP_200_OK)
             else:
                 return Response(content="Email não bate", status_code=status.HTTP_404_NOT_FOUND)
             
