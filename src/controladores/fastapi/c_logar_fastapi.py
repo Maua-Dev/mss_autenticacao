@@ -45,7 +45,6 @@ class CLogarFastApi():
             if self.ucLogin.autenticarLogin(login):
                 content = UCCriarToken(self.auth)(Token.fromDict(self._criarPayload(login.email)))
 
-            #TODO Considerar trocar Response para um model response que tenha mensagem e codigo -> Paramos de depender do FastApi
             return Response(content=content, status_code=HTTPStatus.OK)
 
         except (ErroEmailVazio, ErroEmailInvalido, ErroSenhaVazio, ErroConversaoRequestLogin, ErroConversaoStrRole) as e:

@@ -11,4 +11,4 @@ class UCChaveInvalida():
         self.auth = auth
         
     def __call__(self, chave: Chave):
-        return self.auth.chaveInvalida(chave)
+        return self.auth.isChaveInvalida(chave)

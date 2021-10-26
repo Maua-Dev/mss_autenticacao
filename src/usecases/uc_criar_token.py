@@ -12,6 +12,6 @@ class UCCriarToken():
         self.auth = auth
         
     def __call__(self, token: Token):
-        if self.auth.tokenInvalido(token):
+        if self.auth.isTokenInvalido(token):
             raise ErroTokenInvalido
         return self.auth.criarToken(token)

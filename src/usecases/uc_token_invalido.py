@@ -11,4 +11,4 @@ class UCTokenInvalido():
         self.auth = auth
         
     def __call__(self, token: Token):
-        return self.auth.tokenInvalido(token)
+        return self.auth.isTokenInvalido(token)

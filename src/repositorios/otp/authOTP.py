@@ -19,13 +19,13 @@ class AuthOTP(IAuth):
     def carregarChave(self):
         pass
     
-    def tokenInvalido(self, token: Token):
+    def isTokenInvalido(self, token: Token):
         if not token.payload:
             return True
         else:
             return False
     
-    def chaveInvalida(self, chave: Chave):
+    def isChaveInvalida(self, chave: Chave):
         if not chave.chavePrivada:
             return True
         else:
