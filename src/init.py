@@ -21,7 +21,7 @@ class Init:
 
         # Instanciando tipo de CONTROLER
         if tipo_ctrl == CONTROLADOR.FASTAPI.value:
-            ctrl = FabricaControladorFastAPI(AuthJWT(), repo, COperacoesBcrypt)
+            ctrl = FabricaControladorFastAPI(AuthJWT(), repo, COperacoesBcrypt())
         else:
             raise ErroDeployment2()
 
