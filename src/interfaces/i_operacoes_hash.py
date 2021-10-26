@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 class IOperacoesHash(ABC):
 
     @abstractmethod
-    def checarHashSenha(self, senha: str, hash: str) -> bytes:
+    def checarHashSenha(self, senha: str, hash: str):
         pass
 
     @abstractmethod
