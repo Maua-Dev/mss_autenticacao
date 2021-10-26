@@ -1,7 +1,7 @@
 from src.usecases.uc_login import UCLogin
 from src.interfaces.i_armazenamento_auth import IArmazenamento
 from src.models.login import Login
-from fastapi import Response, status
+from fastapi import Response, status, HTTPException
 from src.usecases.uc_usuario_auth import UCUsuarioAuth
 from src.usecases.uc_criar_token import UCCriarToken
 from src.interfaces.i_auth import IAuth
@@ -48,17 +48,17 @@ class CLogarFastApi:
             return Response(content=content, status_code=status.HTTP_200_OK)
 
         except (ErroEmailVazio, ErroEmailInvalido, ErroSenhaVazio, ErroConversaoRequestLogin, ErroConversaoStrRole) as e:
-            return Response(content=str(e), status_code=status.HTTP_400_BAD_REQUEST)
+            raise HTTPException(detail=str(e), status_code=status.HTTP_400_BAD_REQUEST)
 
         except ErroEmailEOuSenhaIncorretos as e:
-            return Response(content=str(e), status_code=status.HTTP_401_UNAUTHORIZED)
+            raise HTTPException(detail=str(e), status_code=status.HTTP_401_UNAUTHORIZED)
 
         except ErroEmailNaoEncontrado as e:  # Levantado por chamada ucRepo.getRolesPorEmail()
-            return Response(content=str(e), status_code=status.HTTP_404_NOT_FOUND)
+            raise HTTPException(detail=str(e), status_code=status.HTTP_404_NOT_FOUND)
 
         except Exception:
             logging.exception(str(ErroInesperado()))
-            return Response(content=str(ErroInesperado()), status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            raise HTTPException(detail=str(ErroInesperado()), status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def _criarPayload(self, email: str):
         return {"payload": {"email": str(email), "roles": self.ucRepo.getRolesPorEmail(email)}}

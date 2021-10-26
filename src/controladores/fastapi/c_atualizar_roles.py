@@ -1,6 +1,6 @@
 from src.interfaces.i_armazenamento_auth import IArmazenamento
 from src.usecases.uc_usuario_auth import UCUsuarioAuth
-from fastapi import Response, status
+from fastapi import Response, status, HTTPException
 from src.models.login import Login
 from src.repositorios.erros.erros_volatil import ErroEmailNaoEncontrado
 from src.models.erros.erros_models import ErroConversaoStrRole
@@ -33,13 +33,13 @@ class CAtualizarRolesFastApi:
             return Response(content="atualizado com sucesso", status_code=status.HTTP_200_OK)
 
         except ErroEmailNaoEncontrado as e:
-            return Response(content=str(e), status_code=status.HTTP_404_NOT_FOUND)
+            raise HTTPException(detail=str(e), status_code=status.HTTP_404_NOT_FOUND)
 
         except ErroConversaoStrRole as e:
-            return Response(content=str(e), status_code=status.HTTP_400_BAD_REQUEST)
+            raise HTTPException(detail=str(e), status_code=status.HTTP_400_BAD_REQUEST)
 
         except Exception:
             logging.exception(str(ErroInesperado()))
-            return Response(content=str(ErroInesperado()), status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            raise HTTPException(detail=str(ErroInesperado()), status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
