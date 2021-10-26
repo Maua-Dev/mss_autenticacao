@@ -5,6 +5,7 @@ from datetime import date
 from src.models.chave import Chave
 from src.models.token import Token
 
+
 class IAuth(ABC):
     
     @abstractmethod
@@ -28,7 +29,5 @@ class IAuth(ABC):
         pass
 
     @abstractmethod
-    def verificarToken(self, chave: Chave):
+    def verificarToken(self, response: str):
         pass
-    
-    
