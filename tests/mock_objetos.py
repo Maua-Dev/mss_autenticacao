@@ -1,3 +1,6 @@
+from devmaua.src.enum.roles import Roles
+
+from src.models.login import Login
 from src.models.token import Token
 from src.models.chave import Chave
 
@@ -11,9 +14,14 @@ def mockToken() -> Token:
         header={"typ": "JWT"}
         )
 
+
 def mockChave() -> Chave:
     # Usando valores default de jwt.io, convertidos
     return Chave(
         chavePrivada=b"-----BEGIN PRIVATE KEY-----\nMIGEAgEAMBAGByqGSM49AgEGBS...",
         senha=b"your password",
     )
+
+
+def mockLogin() -> Login:
+    return Login(email="18.01234-5@maua.br", senha="senha", roles=[Roles.ALUNO])

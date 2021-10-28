@@ -32,10 +32,11 @@ class CCadastrarLoginAuthFastApi:
 
             return Response(content="Cadastrado com sucesso", status_code=status.HTTP_201_CREATED)
 
+        #TODO considerar: ErroEmailJaCadastrado como 409 Conflict ou deixamos como 400
         except (ErroEmailVazio, ErroEmailInvalido, ErroSenhaVazio, ErroConversaoRequestLogin, ErroEmailJaCadastrado) as e:
             raise HTTPException(detail=str(e), status_code=status.HTTP_400_BAD_REQUEST)
 
         except Exception as e:
-            logging.exception(str(ErroInesperado()))
+            logging.exception(f"{str(ErroInesperado())}: {str(e)}")
             raise HTTPException(detail=str(ErroInesperado()), status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 

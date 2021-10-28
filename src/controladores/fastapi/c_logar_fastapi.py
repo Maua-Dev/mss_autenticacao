@@ -56,8 +56,8 @@ class CLogarFastApi:
         except ErroEmailNaoEncontrado as e:  # Levantado por chamada ucRepo.getRolesPorEmail()
             raise HTTPException(detail=str(e), status_code=status.HTTP_404_NOT_FOUND)
 
-        except Exception:
-            logging.exception(str(ErroInesperado()))
+        except Exception as e:
+            logging.exception(f"{str(ErroInesperado())}: {str(e)}")
             raise HTTPException(detail=str(ErroInesperado()), status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def _criarPayload(self, email: str):

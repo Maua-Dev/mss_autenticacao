@@ -38,8 +38,8 @@ class CAtualizarRolesFastApi:
         except ErroConversaoStrRole as e:
             raise HTTPException(detail=str(e), status_code=status.HTTP_400_BAD_REQUEST)
 
-        except Exception:
-            logging.exception(str(ErroInesperado()))
+        except Exception as e:
+            logging.exception(f"{str(ErroInesperado())}: {str(e)}")
             raise HTTPException(detail=str(ErroInesperado()), status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
