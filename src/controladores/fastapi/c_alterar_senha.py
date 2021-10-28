@@ -22,12 +22,12 @@ class CAlterarSenhaFastApi():
         self.iHash = iHash
         self.uc = UCUsuarioAuth(self.repo, iHash)
         
-    def __call__(self, alterarSenha: ModeloAlterarSenha):
+    def __call__(self, body: dict):
         
         try:
-            token = self.auth.verificarToken(alterarSenha.token)
-            if alterarSenha.email == token["email"]:
-                login = Login.fromDict({"email":alterarSenha.email, "senha":alterarSenha.novasenha})
+            token = self.auth.verificarToken(body["token"])
+            if body["email"] == token["email"]:
+                login = Login.fromDict({"email":body["email"], "senha":body["novasenha"]})
                 self.uc.alterarSenha(login)
                 return Response(content="Senha atualizada com successo", status_code=status.HTTP_200_OK)
             else:
