@@ -14,12 +14,10 @@ from tests import mock_objetos
 class TestCCadastrarLoginAuthFastApi:
 
     def criaBody(self):
-        return """ 
-         {
+        return {
             "email":"mail@mail.com",
             "senha":"senha"
         }
-         """
 
     @patch.object(Login, 'fromDict')
     @patch.object(UCUsuarioAuth, 'cadastrarLoginAuth')

@@ -1,3 +1,5 @@
+from typing import List
+
 from pydantic import BaseModel, validator, ValidationError
 import re
 from devmaua.src.enum.roles import Roles
@@ -53,7 +55,8 @@ class Login(BaseModel):
     def atualizarRoles(self, roles: list[Roles]):
         self.roles = roles
 
-    def rolesFromStrList(roles: list[str]):
+    @staticmethod
+    def rolesFromStrList(roles: list[str]) -> List[Roles]:
         returnRoles = []
         try:
             for role in roles:

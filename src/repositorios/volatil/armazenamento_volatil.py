@@ -1,3 +1,5 @@
+from typing import List
+
 from devmaua.src.enum.roles import Roles
 
 from src.interfaces.i_armazenamento_auth import IArmazenamento
@@ -49,7 +51,7 @@ class ArmazenamentoUsuarioVolatil(IArmazenamento):
                 return True
         raise ErroEmailNaoEncontrado
 
-    def getRolesPorEmail(self, email: str):
+    def getRolesPorEmail(self, email: str) -> List[Roles]:
         for l in self.armazem:
             if l.email == email:
                 return l.roles

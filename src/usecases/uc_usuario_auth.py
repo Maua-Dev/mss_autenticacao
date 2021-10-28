@@ -1,3 +1,5 @@
+from typing import List
+
 from src.interfaces.i_armazenamento_auth import IArmazenamento
 from src.models.login import Login
 from src.interfaces.i_operacoes_hash import IOperacoesHash
@@ -32,5 +34,5 @@ class UCUsuarioAuth:
     def atualizarRoles(self, email: str, roles: list[Roles]):
         self.armazenamento.atualizarRolePorEmail(email, roles)
 
-    def getRolesPorEmail(self, email: str):
+    def getRolesPorEmail(self, email: str) -> List[Roles]:
         return self.armazenamento.getRolesPorEmail(email)
