@@ -1,9 +1,7 @@
 import pytest
-from pydantic import ValidationError
 from src.models.login import Login
 from src.models.erros.erros_models import ErroEmailVazio, ErroEmailInvalido, ErroSenhaVazio, ErroConversaoRequestLogin, ErroConversaoStrRole
 from devmaua.src.enum.roles import Roles
-
 
 
 class TestLogin:
@@ -17,26 +15,29 @@ class TestLogin:
 
     def testValidatorSenhaVazia(self):
         with pytest.raises(ErroSenhaVazio):
-            login = Login(email="email@mail.com", senha="")
+            Login(email="email@mail.com", senha="")
 
     def testValidatorEmailVazio(self):
         with pytest.raises(ErroEmailVazio):
-            login = Login(email="", senha="senha")
+            Login(email="", senha="senha")
 
     def testValidatorEmailInvalido(self):
         with pytest.raises(ErroEmailInvalido):
-            login = Login(email="email.mail", senha="senha")
+            Login(email="email.mail", senha="senha")
 
 # === fromDict()
     def testConversaoDictJogaErroSenhaVazia(self):
         with pytest.raises(ErroSenhaVazio):
             Login.fromDict({"email": "mail@mail.com", "senha": ""})
+
     def testConversaoDictJogaErroEmailVazio(self):
         with pytest.raises(ErroEmailVazio):
             Login.fromDict({"email": "", "senha": "senha"})
+
     def testConversaoDictJogaErroEmailInvalido(self):
         with pytest.raises(ErroEmailInvalido):
             Login.fromDict({"email": "mail.mail.com", "senha": "senha"})
+
     def testConversaoDictJogaErroDeConversaoDict(self):
         with pytest.raises(ErroConversaoRequestLogin):
             # ocorre quando o corpo nao esta no formato {"email":"", "senha":""}

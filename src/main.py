@@ -1,46 +1,15 @@
-from fastapi import FastAPI, Request
+import uvicorn
 
-from src.controladores.fabrica.fabrica_controlador_fastapi import FabricaControladorFastAPI
-from src.repositorios.jwt.authJWT import AuthJWT
-
-from src.controladores.fastapi.c_logar_fastapi import CLogarFastApi
-from src.repositorios.volatil.armazenamento_volatil import ArmazenamentoUsuarioVolatil
-from src.controladores.fastapi.c_cadastrar_login_auth_fastapi import CCadastrarLoginAuthFastApi
-from src.controladores.fastapi.c_atualizar_roles import CAtualizarRolesFastApi
-from src.controladores.hashing.bcrypt.c_operacoes_bcrypt import COperacoesBcrypt
-from src.controladores.fastapi.http.requisicoes import ModeloEsqueciSenha, ModeloAlterarSenha
+from src.cli import Cli
+from src.init import Init
 
 
-app = FastAPI()
+def main(repo: str, ctrl: str):
+    (_, _ctrl) = Init()(tipo_repo=repo, tipo_ctrl=ctrl)
 
-armazenamento = ArmazenamentoUsuarioVolatil()
-auth = AuthJWT()
+    return _, _ctrl
 
-factory = FabricaControladorFastAPI(auth, armazenamento, COperacoesBcrypt)
-
-@app.get("/")
-async def root():
-    return {"mss": "autenticacao",
-            "porta": 8080}
-
-@app.post("/login")
-async def logar(request: Request):
-    return factory.logar(await request.json())
-
-@app.post("/cadastrar")
-async def cadastrarLogin(request: Request):
-    return factory.cadastrarLogin(await request.json())
-
-@app.post("/atualiza/roles")
-async def atualizarRoles(request: Request):
-    return factory.atualizarRoles(await request.json())
-
-@app.post("/esquecisenha")
-async def esqueciSenha(esqueciSenha: ModeloEsqueciSenha):
-    return factory.esqueciSenha(esqueciSenha)
-
-@app.post("/alterarsenha")
-async def esqueciSenha(alterarSenha: ModeloAlterarSenha):
-    return factory.alterarSenha(alterarSenha)
-
-
+if __name__ == '__main__':
+    cli = Cli()
+    (_, ctrl) = main(repo=cli.getRepo(), ctrl=cli.getCtrl())
+    ctrl.start()(app=ctrl.app, host=ctrl.host, porta=cli.getPorta())

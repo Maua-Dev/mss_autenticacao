@@ -18,7 +18,7 @@ class TestUCLogin:
         self.armazenamento = ArmazenamentoUsuarioVolatil()
         self.login = Login(email="18.01234-5@maua.br", senha=bcrypt.hashpw(b"senha", bcrypt.gensalt()))
         self.armazenamento.cadastrarLoginAuth(login=self.login)
-        self.uc = UCLogin(self.armazenamento, COperacoesBcrypt)
+        self.uc = UCLogin(self.armazenamento, COperacoesBcrypt())
         yield
         # Teardown
 
@@ -26,12 +26,12 @@ class TestUCLogin:
         loginCorreto = Login(email="18.01234-5@maua.br", senha="senha")
         assert self.uc.autenticarLogin(loginCorreto)
 
-    def testFalhaNoEmail(self):
+    def testFalhaEmailIncorreto(self):
         with pytest.raises(ErroEmailEOuSenhaIncorretos):
             loginEmailErrado = Login(email="17.01234-5@maua.br", senha="senha")
             self.uc.autenticarLogin(loginEmailErrado)
 
-    def testFalhaNaSenha(self):
+    def testFalhaSenhaIncorreta(self):
         with pytest.raises(ErroEmailEOuSenhaIncorretos):
             loginSenhaErrada = Login(email="18.01234-5@maua.br", senha="sEnha")
             self.uc.autenticarLogin(loginSenhaErrada)

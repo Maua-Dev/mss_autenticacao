@@ -27,17 +27,11 @@ class AuthJWT(IAuth):
         except:
             raise ErroCarregarEnv
     
-    def tokenInvalido(self, token: Token):
-        if not token.payload:
-            return True
-        else:
-            return False
+    def isTokenInvalido(self, token: Token):
+        return not token.payload
     
-    def chaveInvalida(self, chave: Chave):
-        if not chave.chavePrivada:
-            return True
-        else:
-            return False
+    def isChaveInvalida(self, chave: Chave):
+        return not chave.chavePrivada
 
     def verificarToken(self, response: str):
         try:
