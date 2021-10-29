@@ -42,12 +42,13 @@ class CLogarFastApi:
         try:
             login = Login.fromDict(body)
 
+            # Considerar levantar false ao inves de erro no UC --> (talvez NAO faz sentido ter if aqui do jeito que esta agr - redundante)
             if self.ucLogin.autenticarLogin(login):
                 content = UCCriarToken(self.auth)(Token.fromDict(self._criarPayload(login.email)))
-            # Considerar levantar false ao inves de erro --> (talvez NAO faz sentido ter if aqui do jeito que esta agr - redundante)
+
             return Response(content=content, status_code=status.HTTP_200_OK)
 
-        except (ErroEmailVazio, ErroEmailInvalido, ErroSenhaVazio, ErroConversaoRequestLogin, ErroConversaoStrRole) as e:
+        except (ErroEmailVazio, ErroEmailInvalido, ErroSenhaVazio, ErroConversaoRequestLogin) as e:
             raise HTTPException(detail=str(e), status_code=status.HTTP_400_BAD_REQUEST)
 
         except ErroEmailEOuSenhaIncorretos as e:
