@@ -1,7 +1,7 @@
 from src.interfaces.i_auth import IAuth
 
 
-class UCVerificarToken():
+class UCVerificarToken:
     auth: IAuth
 
     def __init__(self, auth: IAuth):

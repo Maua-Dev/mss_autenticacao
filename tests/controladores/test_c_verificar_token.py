@@ -1,7 +1,7 @@
 from src.controladores.fastapi.c_verificar_token_fastapi import CVerificarTokenFastAPI
-from src.repositorios.jwt.authJWT import AuthJWT
-from src.repositorios.oauth.authOAuth import AuthOAuth
-from src.repositorios.otp.authOTP import AuthOTP
+from src.repositorios.jwt.auth_jwt import AuthJWT
+from src.repositorios.oauth.auth_o_auth import AuthOAuth
+from src.repositorios.otp.auth_otp import AuthOTP
 import pytest
 
 @pytest.mark.skip

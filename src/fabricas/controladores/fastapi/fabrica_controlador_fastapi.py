@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 
+from src.controladores.fastapi.c_alterar_senha import CAlterarSenhaFastApi
+from src.controladores.fastapi.c_esqueci_senha import CEsqueciSenhaFastAPI
 from src.controladores.fastapi.c_gerar_token_fastapi import CGerarTokenFastAPI
 from src.controladores.fastapi.c_verificar_token_fastapi import CVerificarTokenFastAPI
 from src.controladores.fastapi.c_cadastrar_login_auth_fastapi import CCadastrarLoginAuthFastApi
@@ -58,6 +60,12 @@ class FabricaControladorFastAPI:
 
     def atualizarRoles(self, body: str):
         return CAtualizarRolesFastApi(self.repo)(body)
+    
+    def esqueciSenha(self, body: dict):
+        return CEsqueciSenhaFastAPI(self.repo, self.iauth)(body)
+    
+    def alterarSenha(self, body: dict):
+        return CAlterarSenhaFastApi(self.repo, self.iauth, self.iHash)(body)
 
     def start(self):
         return Start()

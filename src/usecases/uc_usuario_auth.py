@@ -18,7 +18,7 @@ class UCUsuarioAuth:
             raise ErroEmailJaCadastrado
 
         #Faz decode() do hash para salvar no db como string e nao byte
-        loginEncriptado = Login(email=login.email, senha=self.iHash.criarHashSenha(login.senha).decode())
+        loginEncriptado = Login(email=login.email, senha=self.iHash.criarHashSenha(login.senha).decode(), roles=login.roles)
         self.armazenamento.cadastrarLoginAuth(loginEncriptado)
 
     def deletarLoginPorEmail(self, email: str):
@@ -26,7 +26,7 @@ class UCUsuarioAuth:
 
     def alterarSenha(self, login: Login):
         #Faz decode do hash para salvar no db como string
-        loginEncriptado = Login(email=login.email, senha=self.iHash.criarHashSenha(login.senha).decode())
+        loginEncriptado = Login(email=login.email, senha=self.iHash.criarHashSenha(login.senha).decode(), roles=login.roles)
         self.armazenamento.alterarSenha(loginEncriptado)
 
     def atualizarRoles(self, email: str, roles: list[Roles]):

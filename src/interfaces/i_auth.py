@@ -5,6 +5,7 @@ from datetime import date
 from src.models.chave import Chave
 from src.models.token import Token
 
+
 class IAuth(ABC):
     
     @abstractmethod
@@ -20,15 +21,13 @@ class IAuth(ABC):
         pass
     
     @abstractmethod
-    def tokenInvalido(self, token: Token):
+    def isTokenInvalido(self, token: Token):
         pass
 
     @abstractmethod
-    def chaveInvalida(self, chave: Chave):
+    def isChaveInvalida(self, chave: Chave):
         pass
 
     @abstractmethod
-    def verificarToken(self, chave: Chave):
+    def verificarToken(self, response: str):
         pass
-    
-    

@@ -1,19 +1,19 @@
 from src.usecases.uc_login import UCLogin
 from src.interfaces.i_armazenamento_auth import IArmazenamento
 from src.models.login import Login
-from fastapi import Response
+from fastapi import Response, status, HTTPException
 from src.usecases.uc_usuario_auth import UCUsuarioAuth
 from src.usecases.uc_criar_token import UCCriarToken
 from src.interfaces.i_auth import IAuth
-from http import HTTPStatus
 from src.models.erros.erros_models import ErroEmailVazio, ErroEmailInvalido, ErroSenhaVazio, ErroConversaoRequestLogin, ErroConversaoStrRole
-from src.usecases.erros.erros_uc import ErroEmailEOuSenhaIncorretos
+from src.usecases.erros.erros_uc import ErroEmailEOuSenhaIncorretos, ErroInesperado
 from src.repositorios.erros.erros_volatil import ErroEmailNaoEncontrado
 from src.models.token import Token
 from src.interfaces.i_operacoes_hash import IOperacoesHash
+import logging
 
 
-class CLogarFastApi():
+class CLogarFastApi:
     repo: IArmazenamento
     ucLogin: UCLogin
     ucRepo: UCUsuarioAuth
@@ -44,21 +44,21 @@ class CLogarFastApi():
 
             if self.ucLogin.autenticarLogin(login):
                 content = UCCriarToken(self.auth)(Token.fromDict(self._criarPayload(login.email)))
-
-            #TODO Considerar trocar Response para um model response que tenha mensagem e codigo -> Paramos de depender do FastApi
-            return Response(content=content, status_code=HTTPStatus.OK)
+            # Considerar levantar false ao inves de erro --> (talvez NAO faz sentido ter if aqui do jeito que esta agr - redundante)
+            return Response(content=content, status_code=status.HTTP_200_OK)
 
         except (ErroEmailVazio, ErroEmailInvalido, ErroSenhaVazio, ErroConversaoRequestLogin, ErroConversaoStrRole) as e:
-            return Response(content=str(e), status_code=HTTPStatus.BAD_REQUEST)
+            raise HTTPException(detail=str(e), status_code=status.HTTP_400_BAD_REQUEST)
 
         except ErroEmailEOuSenhaIncorretos as e:
-            return Response(content=str(e), status_code=HTTPStatus.UNAUTHORIZED)
+            raise HTTPException(detail=str(e), status_code=status.HTTP_401_UNAUTHORIZED)
 
         except ErroEmailNaoEncontrado as e:  # Levantado por chamada ucRepo.getRolesPorEmail()
-            return Response(content=str(e), status_code=HTTPStatus.NOT_FOUND)
+            raise HTTPException(detail=str(e), status_code=status.HTTP_404_NOT_FOUND)
 
-        except Exception:
-            return Response(content="Erro inesperado", status_code=HTTPStatus.INTERNAL_SERVER_ERROR)
+        except Exception as e:
+            logging.exception(f"{str(ErroInesperado())}: {str(e)}")
+            raise HTTPException(detail=str(ErroInesperado()), status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def _criarPayload(self, email: str):
         return {"payload": {"email": str(email), "roles": self.ucRepo.getRolesPorEmail(email)}}

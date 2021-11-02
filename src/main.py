@@ -9,11 +9,6 @@ def main(repo: str, ctrl: str):
 
     return _, _ctrl
 
-@app.get("/validar")
-async def atualizarRoles(request: Request):
-    token = request.headers['Authorization'].split()[1]
-    return factory.verificarToken(token)
-
 if __name__ == '__main__':
     cli = Cli()
     (_, ctrl) = main(repo=cli.getRepo(), ctrl=cli.getCtrl())
