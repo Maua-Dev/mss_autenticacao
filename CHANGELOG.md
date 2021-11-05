@@ -14,6 +14,7 @@ e o projeto mantém [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 - Pasta erros para repositórios
 - Pasta criacao para criação de tokens, baseado no que for pedido.
 - docker-compose.yml
+- Serviço recuperar senha
 
 ### Modificado
 - Controller CHTTPGerarToken em relação de como é usado e como chama token.py
