@@ -2,7 +2,7 @@ from src.interfaces.i_auth import IAuth
 
 from src.usecases.uc_verificar_token import UCVerificarToken
 
-from fastapi import Response, status
+from fastapi import Response, status, HTTPException
 
 
 class CVerificarTokenFastAPI:
@@ -14,9 +14,7 @@ class CVerificarTokenFastAPI:
     def __call__(self, body: str):
         try:
             content = UCVerificarToken(self.auth)(body)
-            response = Response(content=str(content), status_code=status.HTTP_200_OK)
+            return Response(content=str(content), status_code=status.HTTP_200_OK)
         except Exception as e:
-            response = Response(content="Erro Auth", status_code=status.HTTP_401_UNAUTHORIZED)
-
-        return response
+            raise HTTPException(detail=str(e), status_code=status.HTTP_401_UNAUTHORIZED)
 

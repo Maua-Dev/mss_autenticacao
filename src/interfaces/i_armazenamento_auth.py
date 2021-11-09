@@ -1,5 +1,7 @@
 
 from abc import ABC, abstractmethod
+from typing import List
+
 from src.models.login import Login
 from devmaua.src.enum.roles import Roles
 
@@ -33,5 +35,5 @@ class IArmazenamento(ABC):
         pass
 
     @abstractmethod
-    def getRolesPorEmail(self, email: str):
+    def getRolesPorEmail(self, email: str) -> List[Roles]:
         pass

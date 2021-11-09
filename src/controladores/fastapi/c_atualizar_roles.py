@@ -30,7 +30,7 @@ class CAtualizarRolesFastApi:
             roles = Login.rolesFromStrList(roles=body["roles"])
             self.uc.atualizarRoles(email=body["email"], roles=roles)
 
-            return Response(content="atualizado com sucesso", status_code=status.HTTP_200_OK)
+            return Response(content="Atualizado com sucesso", status_code=status.HTTP_200_OK)
 
         except ErroEmailNaoEncontrado as e:
             raise HTTPException(detail=str(e), status_code=status.HTTP_404_NOT_FOUND)

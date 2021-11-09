@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+
 from src.controladores.fastapi.c_alterar_senha import CAlterarSenhaFastApi
 from src.controladores.fastapi.c_esqueci_senha import CEsqueciSenhaFastAPI
 from src.controladores.fastapi.c_gerar_token_fastapi import CGerarTokenFastAPI
@@ -45,9 +46,6 @@ class FabricaControladorFastAPI:
 
         self.app = FastAPI()
         self.app.include_router(Roteador(self))
-        
-    def gerarToken(self, body: dict):
-        return CGerarTokenFastAPI(self.iauth)(body)
     
     def verificarToken(self, body: str):
         return CVerificarTokenFastAPI(self.iauth)(body)
