@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.3'
 
 services:
  mss_autenticacao:
@@ -8,3 +8,7 @@ services:
   - 8080:8080
   volumes:
   - ./:/app
+  image: postgres
+  restart: always
+  environment:
+    POSTGRES_PASSWORD: example
