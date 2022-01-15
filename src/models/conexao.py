@@ -32,3 +32,18 @@ class Conexao(BaseModel):
         if len(v) == 0:
             raise ValueError("Senha Vazio")
         return v
+
+    @staticmethod
+    def fromEnv():
+        try:
+            chave = dotenv_values(".env")
+            conn = Conexao(
+                host = chave["host_sql"],
+                database = chave["database_sql"],
+                usuario = chave["user_sql"],
+                senha = chave["password_sql"]
+            )
+            return conn
+        except (hostNaoVazio, databaseNaoVazio, usuarioNaoVazio, senhaNaoVazia) as e:
+            raise e
+        
