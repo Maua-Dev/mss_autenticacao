@@ -1,4 +1,5 @@
 import abc
+from logging import exception
 from pydantic import BaseModel, validator, ValidationError
 from dotenv import dotenv_values
 
@@ -6,6 +7,7 @@ from dotenv import dotenv_values
 class Conexao(BaseModel):
     host: str
     database: str
+    tabela: str
     usuario: str
     senha: str
     
@@ -19,6 +21,12 @@ class Conexao(BaseModel):
     def databaseNaoVazio(cls, v):
         if len(v) == 0:
             raise ValueError("Database Vazio")
+        return v
+    
+    @validator('tabela')
+    def tabelaNaoVazia(cls, v):
+        if len(v) == 0:
+            raise ValueError("Tabela Vazia")
         return v
 
     @validator('usuario')
@@ -40,10 +48,11 @@ class Conexao(BaseModel):
             conn = Conexao(
                 host = chave["host_sql"],
                 database = chave["database_sql"],
+                tabela = chave["table_sql"],
                 usuario = chave["user_sql"],
                 senha = chave["password_sql"]
             )
             return conn
-        except (hostNaoVazio, databaseNaoVazio, usuarioNaoVazio, senhaNaoVazia) as e:
-            raise e
+        except:
+            raise exception
         
