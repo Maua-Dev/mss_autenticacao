@@ -14,6 +14,10 @@ class ICRUD(ABC):
     @abstractmethod
     def read(self, login:Login):
         pass
+    
+    @abstractmethod
+    def readByEmail(self, login:Login):
+        pass
 
     @abstractmethod
     def delete(self, login:Login):
