@@ -1,15 +1,15 @@
-# version: '3.3'
+ version: '3.3'
 
-# services:
-  # db:
-  #   image: postgres:12.9-alpine
-  #   restart: always
-  #   container_name: postgres
-  #   ports:
-  #     - 5432:5432
-  #   environment:
-  #     POSTGRES_PASSWORD: devmaua
-  #     POSTGRES_DB: Dev.Auth
+ services:
+   db:
+     image: postgres:12.9-alpine
+     restart: always
+     container_name: postgres
+     ports:
+       - 5432:5432
+     environment:
+       POSTGRES_PASSWORD: devmaua
+       POSTGRES_DB: Dev.Auth
 #  mss_autenticacao:
 #   build:
 #    context: .
