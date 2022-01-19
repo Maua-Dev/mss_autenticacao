@@ -1,3 +1,5 @@
+import email
+from unicodedata import name
 from src.interfaces.i_armazenamento_auth import IArmazenamento
 from src.models.login import Login
 from src.repositorios.postgre.db_config import DBConnectionHandler
@@ -19,7 +21,16 @@ class PostgresRepository(IArmazenamento):
                 return False
 
     def cadastrarLoginAuth(self, login: Login):
-        pass
+        with DBConnectionHandler() as db:
+            try:
+                response = db.session.insert(LoginDto).values(email=login.email, senha=login.senha).returning(id)
+                if(response >= 0):
+                    return True
+                else:
+                    return False
+            except Exception  as error:
+                print(error)
+                return False
 
     
     def alterarSenha(self, login: Login):
