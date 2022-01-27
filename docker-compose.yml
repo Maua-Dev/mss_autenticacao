@@ -6,14 +6,15 @@
      restart: always
      container_name: postgres
      ports:
-       - 5432:5432
+       - 8090:5432
      environment:
        POSTGRES_PASSWORD: devmaua
        POSTGRES_DB: Dev.Auth
-#  mss_autenticacao:
-#   build:
-#    context: .
-#   ports:
-#   - 8080:8080
-#   volumes:
-#   - ./:/app
+
+   mss_autenticacao:
+    build:
+      context: .
+    ports:
+      - 8080:8080
+    volumes:
+      - ./:/app

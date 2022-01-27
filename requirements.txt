@@ -7,5 +7,5 @@ pytest-cov==2.12.1
 requests==2.26.0
 git+https://github.com/Maua-Dev/models-devmaua
 bcrypt==3.2.0
-psycopg2==2.9.3
+psycopg2-binary==2.9.3
 sqlalchemy==1.4.29
