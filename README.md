@@ -37,7 +37,7 @@ Para subir o container:
 
     pytest
 
-# Autores
+# Autore(s)
 ## Grupo Back-end
 
     Nome - Github username
