@@ -1,16 +1,16 @@
 from enum import Enum
-
+import os
 class Config():
     sqlConnection: str
 
 class ConfigLocal(Config):
     def __init__(self) -> None:
         super().__init__()
-        self.sqlConnection = 'postgresql://postgres:devmaua@localhost:5432/Dev.Materias'
+        self.sqlConnection = f'postgresql://postgres:devmaua@{os.getenv("DB") or "localhost"}:5432/Devmaua'
 class ConfigDes(Config):
     def __init__(self) -> None:
         super().__init__()
-        self.sqlConnection = 'postgresql://postgres:DevMaua2022!@db-devmaua-identifier.cjzimvmkm7zt.sa-east-1.rds.amazonaws.com:5432/DevMaua_DB_dev'
+        self.sqlConnection = f'postgresql://{os.getenv("DB_USER")}:{os.getenv("DB_PW")}@db-devmaua-identifier.cjzimvmkm7zt.sa-east-1.rds.amazonaws.com:5432/{os.getenv("DB_NAME")}'
 class ConfigProd(Config):
     def __init__(self) -> None:
         super().__init__()
@@ -24,15 +24,16 @@ class EnvEnum(Enum):
 
 
 class Envs:
-    appEnv: EnvEnum = EnvEnum.LOCAL
-
+    appEnv: EnvEnum = EnvEnum(os.getenv('PYTHON_ENV') or 'Local')
     @staticmethod
     def IsLocal():
         return Envs.appEnv == EnvEnum.LOCAL
+    
     @staticmethod
     def IsDes():
         return Envs.appEnv == EnvEnum.DES
-    @staticmethod
+    
+    @staticmethod    
     def IsProd():
         return Envs.appEnv == EnvEnum.PROD
 

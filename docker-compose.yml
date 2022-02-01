@@ -8,13 +8,19 @@
      ports:
        - 8090:5432
      environment:
-       POSTGRES_PASSWORD: devmaua
-       POSTGRES_DB: Dev.Auth
+        POSTGRES_DB: Devmaua
+        POSTGRES_PASSWORD: devmaua
 
    mss_autenticacao:
     build:
       context: .
     ports:
       - 8080:8080
+    environment:
+      - PYTHON_ENV=Local
+      - DB_USER=postgres
+      - DB_PW=DevMaua2022!
+      - DB_NAME=DevMaua_DB_dev
+      - DB=postgres
     volumes:
       - ./:/app
