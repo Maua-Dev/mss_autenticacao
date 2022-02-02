@@ -17,6 +17,5 @@ RUN pip install --upgrade pip
 RUN apk add gcc
 RUN apk add --no-cache libressl-dev musl-dev libffi-dev
 RUN pip install -r requirements.txt
-RUN apk add --no-cache postgresql postgresql-contrib
 
 CMD ["python3", "-m", "src.main"]

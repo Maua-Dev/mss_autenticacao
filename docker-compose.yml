@@ -6,7 +6,7 @@
      restart: always
      container_name: postgres
      ports:
-       - 8090:5432
+       - 5432:5432
      environment:
         POSTGRES_DB: Devmaua
         POSTGRES_PASSWORD: devmaua
