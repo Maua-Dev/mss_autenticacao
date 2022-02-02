@@ -40,7 +40,19 @@ class PostgresRepository(IArmazenamento):
 
     
     def alterarSenha(self, login: Login):
-        pass
+        with DBConnectionHandler() as db:
+            try:
+                #logger = LoginDto(email=login.email, senha=login.senha)
+                response = db.session.query(LoginDto).filter(LoginDto.email == login.email).first()
+                response.senha = login.senha
+                response = db.session.commit()
+                if(self.getSenhaEncriptadaPorEmail(login.email) == login.senha):
+                    return True
+                else:
+                    return False
+            except Exception  as error:
+                print(error)
+                return False
 
     
     def deletarLoginAuthPorEmail(self, email: str):
@@ -57,7 +69,16 @@ class PostgresRepository(IArmazenamento):
                 return False
     
     def getSenhaEncriptadaPorEmail(self, email: str):
-        pass
+        with DBConnectionHandler() as db:
+            try:
+                response = db.session.query(LoginDto).filter(LoginDto.email == email).first()
+                if(response):
+                    return response.senha
+                else:
+                    return ""
+            except Exception  as error:
+                print(error)
+                return ""
 
     
     def atualizarRolePorEmail(self, email: str, roles: list[Roles]):

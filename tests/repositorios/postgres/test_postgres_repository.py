@@ -11,7 +11,7 @@ class Test_PostgresRepository:
         login = Login(email="10.0000@0.maua", senha="10.0000@0.maua")
         repository = PostgresRepository()
         if (repository.emailExiste(login.email)):
-            repository.deletarLoginAuthPorEmail(login)
+            repository.deletarLoginAuthPorEmail(login.email)
         response = repository.cadastrarLoginAuth(login)
         repository.deletarLoginAuthPorEmail(login)
         assert response
@@ -20,7 +20,7 @@ class Test_PostgresRepository:
         login = Login(email="10.0000@0.maua", senha="10.0000@0.maua")
         repository = PostgresRepository()
         if (repository.emailExiste(login.email)):
-            repository.deletarLoginAuthPorEmail(login)
+            repository.deletarLoginAuthPorEmail(login.email)
         response = repository.cadastrarLoginAuth(login)
         response = repository.cadastrarLoginAuth(login)
         repository.deletarLoginAuthPorEmail(login)
@@ -46,6 +46,15 @@ class Test_PostgresRepository:
         response = repository.emailExiste('10.00000@maua.br')
         assert not response
         
+    def test_password_update_with_db_local_success(self):
+        login = Login(email="10.0000@0.maua", senha="10.0000@0.maua")
+        repository = PostgresRepository()
+        if (repository.emailExiste(login.email)):
+            repository.deletarLoginAuthPorEmail(login.email)
+        response = repository.cadastrarLoginAuth(login)
+        login.senha = "newpassword"
+        response = repository.alterarSenha(login)
+        assert response
 
 
     # def test_login_with_db_des(self):
