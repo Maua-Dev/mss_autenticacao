@@ -1,3 +1,5 @@
+from cmath import log
+from distutils.log import Log
 import email
 import psycopg2
 from unicodedata import name
@@ -22,12 +24,13 @@ class PostgresRepository(IArmazenamento):
                 print(error)
                 return False
 
-    def cadastrarLoginAuth(self, login: LoginDto):
+    def cadastrarLoginAuth(self, login: Login):
         with DBConnectionHandler() as db:
             try:
-                response = db.session.add(login)
+                logger = LoginDto(email=login.email, senha=login.senha)
+                response = db.session.add(logger)
                 response = db.session.commit()
-                if(self.emailExiste(email=login.email)):
+                if(self.emailExiste(email=logger.email)):
                     return True
                 else:
                     return False
@@ -40,12 +43,12 @@ class PostgresRepository(IArmazenamento):
         pass
 
     
-    def deletarLoginAuthPorEmail(self, login: LoginDto):
+    def deletarLoginAuthPorEmail(self, email: str):
         with DBConnectionHandler() as db:
             try:
-                response = db.session.query(LoginDto).filter(LoginDto.email == login.email).delete()
+                response = db.session.query(LoginDto).filter(LoginDto.email == email).delete()
                 response = db.session.commit()
-                if(not self.emailExiste(email=login.email)):
+                if(not self.emailExiste(email=email)):
                     return True
                 else:
                     return False
