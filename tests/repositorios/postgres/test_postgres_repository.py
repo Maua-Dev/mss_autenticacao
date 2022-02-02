@@ -1,5 +1,6 @@
 import email
 from src.repositorios.postgre.postgres_repository import PostgresRepository
+from src.repositorios.postgre.login_dto import LoginDto
 from src.models.login import Login
 from src.envs import Envs, EnvEnum
 
@@ -16,7 +17,7 @@ class Test_PostgresRepository:
         assert not response
         
     def test_register_with_db_local(self):
-        login = Login(email="10.0000@0.maua", senha="10.0000@0.maua")
+        login = LoginDto(email="10.0000@0.maua", senha="10.0000@0.maua")
         repository = PostgresRepository()
         response = repository.cadastrarLoginAuth(login)
         assert response
@@ -26,7 +27,8 @@ class Test_PostgresRepository:
         assert not response
 
     # def test_login_with_db_des(self):
-    #     Envs.appEnv = EnvEnum.DES
+    #     Envs.appEnv = EnvEnum.DE
+    # S
     #     repository = PostgresRepository()
     #     response = repository.emailExiste('15.01310-3@maua.br')
     #     assert response

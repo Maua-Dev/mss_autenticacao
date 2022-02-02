@@ -20,11 +20,12 @@ class PostgresRepository(IArmazenamento):
                 print(error)
                 return False
 
-    def cadastrarLoginAuth(self, login: Login):
+    def cadastrarLoginAuth(self, login: LoginDto):
         with DBConnectionHandler() as db:
             try:
-                response = db.session.insert(LoginDto).values(email=login.email, senha=login.senha).returning(id)
-                if(response >= 0):
+                response = db.session.add(login)
+                response = db.session.commit()
+                if(self.emailExiste(email=login.email)):
                     return True
                 else:
                     return False

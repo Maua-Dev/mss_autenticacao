@@ -1,5 +1,5 @@
 
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Sequence
 
 from src.models.login import Login
 from src.repositorios.postgre.db_base import Base
