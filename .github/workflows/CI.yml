@@ -24,7 +24,7 @@ jobs:
     - name: Setup Postgres container
       run: |
         docker-compose build db;
-        docker-compose up db
+        docker-compose up -d db
     - name: Runs tests
       run: pytest
     - name: Create coverage report
