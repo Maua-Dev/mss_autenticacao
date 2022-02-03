@@ -25,6 +25,8 @@ jobs:
       run: |
         docker-compose build db;
         docker-compose up -d db
+    - name: Sleep for 10 seconds #time to postgres setup
+      run: sleep 10s
     - name: Runs tests
       run: pytest
     - name: Create coverage report
@@ -47,10 +49,8 @@ jobs:
       run: docker-compose up -d
     - name: Get containers running
       run: docker ps
-    - name: Get logs
-      run: docker logs test
-    - name: Sleep for 5 seconds
-      run: sleep 5s
+    - name: Sleep for 10 seconds
+      run: sleep 10s
     - name: Test main route
       id: mainRoute
       run: echo "::set-output name=status::$(curl -o /dev/null -s -w "%{http_code}\n" localhost:8080)"
