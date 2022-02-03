@@ -38,13 +38,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: docker build -t test .
+      run: docker-compose build
     - name: Run
-      run: docker run --name test -d -p 8080:8080 test
+      run: docker-compose up
     - name: Get containers running
       run: docker ps
-    - name: Get logs
-      run: docker logs test
     - name: Sleep for 5 seconds
       run: sleep 5s
     - name: Test main route
