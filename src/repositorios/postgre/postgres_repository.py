@@ -7,6 +7,7 @@ from src.interfaces.i_armazenamento_auth import IArmazenamento
 from src.models.login import Login
 from src.repositorios.postgre.db_config import DBConnectionHandler
 from src.repositorios.postgre.login_dto import LoginDto
+from src.repositorios.postgre.role_dto import RoleDto
 
 from devmaua.src.enum.roles import Roles
 
@@ -86,4 +87,21 @@ class PostgresRepository(IArmazenamento):
 
     
     def getRolesPorEmail(self, email: str):
+        pass
+
+    def addRolesTable(self):
+        with DBConnectionHandler() as db:
+            try:
+                for role in Roles:
+                    try:
+                        db.session.add(RoleDto(role=role))
+                        db.session.commit()
+                        
+                    except Exception as error:
+                        print(error)
+
+            except Exception  as error:
+                print(error)
+                return ""
+
         pass
