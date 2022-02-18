@@ -94,7 +94,7 @@ class PostgresRepository(IArmazenamento):
             try:
                 for role in Roles:
                     try:
-                        db.session.add(RoleDto(role=role.name))
+                        db.session.add(RoleDto(role=role.name, role_id=role.value))
                         db.session.commit()
                         
                     except Exception as error:

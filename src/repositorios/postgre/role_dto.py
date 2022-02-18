@@ -12,5 +12,5 @@ class RoleDto(Base):
 
     id = Column(Integer, primary_key=True)
     role = Column(String, nullable=False, unique=True)
-    
+    role_id = Column(Integer, nullable=False)
           
