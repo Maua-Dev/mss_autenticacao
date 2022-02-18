@@ -94,7 +94,7 @@ class PostgresRepository(IArmazenamento):
             try:
                 for role in Roles:
                     try:
-                        db.session.add(RoleDto(role=role))
+                        db.session.add(RoleDto(role=role.name))
                         db.session.commit()
                         
                     except Exception as error:
@@ -102,6 +102,6 @@ class PostgresRepository(IArmazenamento):
 
             except Exception  as error:
                 print(error)
-                return ""
+                return False
 
-        pass
+        return True

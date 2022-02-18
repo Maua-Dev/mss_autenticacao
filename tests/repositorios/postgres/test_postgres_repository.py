@@ -55,6 +55,11 @@ class Test_PostgresRepository:
         login.senha = "newpassword"
         response = repository.alterarSenha(login)
         assert response
+    
+    def test_creation_enum_index(self):
+        repository = PostgresRepository()
+        response = repository.addRolesTable()
+        assert response
 
 
     # def test_login_with_db_des(self):
