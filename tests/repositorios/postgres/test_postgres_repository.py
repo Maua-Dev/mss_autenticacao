@@ -4,6 +4,8 @@ from src.repositorios.postgre.login_dto import LoginDto
 from src.models.login import Login
 from src.envs import Envs, EnvEnum
 
+from devmaua.src.enum.roles import Roles
+
 
 class Test_PostgresRepository:
 
@@ -59,6 +61,15 @@ class Test_PostgresRepository:
     def test_creation_enum_index(self):
         repository = PostgresRepository()
         response = repository.addRolesTable()
+        assert response
+
+    def test_creation_add_roles(self):
+        login = Login(email="10.0000@0.maua", senha="10.0000@0.maua", roles=[Roles.ALUNO, Roles.ALUNO_IC])
+        repository = PostgresRepository()
+        if (repository.emailExiste(login.email)):
+            repository.deletarLoginAuthPorEmail(login.email)
+        response = repository.cadastrarLoginAuth(login)
+        response = repository.atualizarRolePorEmail(login.email, [Roles.ALUNO, Roles.ALUNO_IC])
         assert response
 
 
