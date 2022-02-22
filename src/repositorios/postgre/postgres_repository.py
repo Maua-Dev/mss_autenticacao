@@ -69,7 +69,13 @@ class PostgresRepository(IArmazenamento):
     def deletarLoginAuthPorEmail(self, email: str):
         with DBConnectionHandler() as db:
             try:
-                print("Todo - Add code")
+                response = db.session.query(UsersDto).filter(UsersDto.email == email).first()
+                response = db.session.delete(response)
+                db.session.commit()
+                if(not self.emailExiste(email=email)):
+                    return True
+                else:
+                    return False
             except Exception as error:
                 print(error)
                 return False
@@ -83,11 +89,11 @@ class PostgresRepository(IArmazenamento):
                 if (response):
                     return response.senha
                 else:
-                    return False
+                    return ""
 
             except Exception as error:
                 print(error)
-                return False
+                return ""
 
     
     def atualizarRolePorEmail(self, email: str, roles: list[Roles]):
@@ -95,10 +101,10 @@ class PostgresRepository(IArmazenamento):
             try:
                 response = db.session.query(UsersDto).filter(UsersDto.email == email).first()
                 fkey = response.id
-                current_roles = self.getRolesPorEmail(email)
                 for role in roles:
-                    response = db.session.add(RoleDto(id_fk=fkey, role=role.value))
-                
+                    db.session.add(RoleDto(id_fk=fkey, role=role.value))
+                db.session.commit()
+                return True
 
             except Exception as error:
                 print(error)
@@ -108,7 +114,10 @@ class PostgresRepository(IArmazenamento):
     def getRolesPorEmail(self, email: str):
         with DBConnectionHandler() as db:
             try:
-                print("Todo - Add code")
+                response = db.session.query(UsersDto).filter(UsersDto.email == email).first()
+                response = db.session.query(RoleDto).filter(RoleDto.id_fk).all()
+                print(response)
+                return response
             except Exception as error:
                 print(error)
-                return False
+                return ""

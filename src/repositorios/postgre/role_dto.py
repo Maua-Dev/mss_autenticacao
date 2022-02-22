@@ -16,4 +16,4 @@ class RoleDto(Base):
     role = Column(Integer, nullable=False, unique=True)
           
     # N-1 -- Role - User
-    user_back = relationship("UserDto", back_populates="Role")
+    user_back = relationship("User")#, back_populates="Role")

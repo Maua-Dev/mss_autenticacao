@@ -9,8 +9,12 @@ from devmaua.src.enum.roles import Roles
 
 class Test_PostgresRepository:
 
+    # Template login.:
+    # login = Login(email="10.0000@0.maua", senha="10.0000@0.maua", roles=[Roles.ALUNO, Roles.ALUNO_IC])
+
+
     def test_register_with_db_local(self):
-        login = Login(email="10.0000@0.maua", senha="10.0000@0.maua")
+        login = Login(email="10.0000@0.maua", senha="10.0000@0.maua", roles=[Roles.ALUNO, Roles.ALUNO_IC])
         repository = PostgresRepository()
         if (repository.emailExiste(login.email)):
             repository.deletarLoginAuthPorEmail(login.email)
@@ -19,7 +23,7 @@ class Test_PostgresRepository:
         assert response
 
     def test_register_fail_duplicate_with_db_local(self):
-        login = Login(email="10.0000@0.maua", senha="10.0000@0.maua")
+        login = Login(email="10.0000@0.maua", senha="10.0000@0.maua", roles=[Roles.ALUNO, Roles.ALUNO_IC])
         repository = PostgresRepository()
         if (repository.emailExiste(login.email)):
             repository.deletarLoginAuthPorEmail(login.email)
@@ -29,7 +33,7 @@ class Test_PostgresRepository:
         assert not response
 
     def test_delete_user_by_email(self):
-        login = Login(email="10.0000@0.maua", senha="10.0000@0.maua")
+        login = Login(email="10.0000@0.maua", senha="10.0000@0.maua", roles=[Roles.ALUNO, Roles.ALUNO_IC])
         repository = PostgresRepository()
         if (not repository.emailExiste(login.email)):
             response = repository.cadastrarLoginAuth(login)
@@ -38,18 +42,19 @@ class Test_PostgresRepository:
 
 
     def test_login_with_db_local(self):
-        login = Login(email="10.0000@0.maua", senha="10.0000@0.maua")
+        login = Login(email="10.0000@0.maua", senha="10.0000@0.maua", roles=[Roles.ALUNO, Roles.ALUNO_IC])
         repository = PostgresRepository()
         response = repository.cadastrarLoginAuth(login)
         repository.deletarLoginAuthPorEmail(login.email)
         assert response
+
     def test_login_fail_with_db_local(self):
         repository = PostgresRepository()
         response = repository.emailExiste('10.00000@maua.br')
         assert not response
         
     def test_password_update_with_db_local_success(self):
-        login = Login(email="10.0000@0.maua", senha="10.0000@0.maua")
+        login = Login(email="10.0000@0.maua", senha="10.0000@0.maua", roles=[Roles.ALUNO, Roles.ALUNO_IC])
         repository = PostgresRepository()
         if (repository.emailExiste(login.email)):
             repository.deletarLoginAuthPorEmail(login.email)
@@ -58,10 +63,6 @@ class Test_PostgresRepository:
         response = repository.alterarSenha(login)
         assert response
     
-    def test_creation_enum_index(self):
-        repository = PostgresRepository()
-        response = repository.addRolesTable()
-        assert response
 
     def test_creation_add_roles(self):
         login = Login(email="10.0000@0.maua", senha="10.0000@0.maua", roles=[Roles.ALUNO, Roles.ALUNO_IC])
@@ -69,7 +70,6 @@ class Test_PostgresRepository:
         if (repository.emailExiste(login.email)):
             repository.deletarLoginAuthPorEmail(login.email)
         response = repository.cadastrarLoginAuth(login)
-        response = repository.atualizarRolePorEmail(login.email, [Roles.ALUNO, Roles.ALUNO_IC])
         assert response
 
 

@@ -14,7 +14,7 @@ class UsersDto(Base):
     email= Column(String, nullable=False, unique=True)
     
     # 1-1 -- user - login
-    login_back = relationship("LoginDto", back_populates="User", uselist=False)
+    login_back = relationship("Login", cascade="all, delete", uselist=False)
     
     # 1-n -- user - role
-    role_back = relationship("RoleDto", back_populates="User")
+    role_back = relationship("Role")

@@ -10,9 +10,9 @@ from src.repositorios.postgre.db_base import Base
 class LoginDto(Base):
     __tablename__ = 'Login'
 
-    id = Column(Integer, nullable=False)
+    id = Column(Integer, primary_key=True, nullable=False)
     id_fk = Column(Integer, ForeignKey("User.id"))
     senha= Column(String, nullable=False)
 
     # 1-1 -- login - user
-    user_back = relationship("UserDto", back_populates="Login")
+    user_back = relationship("User")#, back_populates="Login")
